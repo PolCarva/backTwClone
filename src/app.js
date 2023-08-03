@@ -3,6 +3,7 @@ const path = require('path');
 const passport = require('passport');
 const morgan = require('morgan');
 const session = require('express-session');
+const cors = require('cors');
 const{ Server: HttpServer } = require('http');
 
 const app = express(); 
