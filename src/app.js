@@ -32,6 +32,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //RUTAS
+app.get('/', (req, res) => {
+	res.send('hola');
+});
+
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
 const FollowersListsRouter  = require('./routes/followersLists');
