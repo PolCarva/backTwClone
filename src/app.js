@@ -33,7 +33,7 @@ app.use(passport.session());
 
 //RUTAS
 app.get('/', (req, res) => {
-	res.send('hola');
+	res.send('hola a todos');
 });
 
 const AuthRouter  = require('./routes/auth');
