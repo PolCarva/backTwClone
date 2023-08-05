@@ -32,9 +32,9 @@ async function server (){
 			logger.info(err);
 		});
 
-		const PORT = 8080;
+		const PORT = process.env.PORT || 3000;
 
-		const server = httpServer.listen(PORT, () => {
+		const server = httpServer.listen(PORT, '0.0.0.0' ,() => {
 			logger.info(`App listening on port ${PORT}`);
 		});
 
