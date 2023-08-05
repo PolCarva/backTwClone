@@ -1,11 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-//const AuthApi = require('../services/auth');
+const AuthApi = require('../services/auth');
 
 class AuthController{
 	constructor(){
-		//this.authApi = new AuthApi();
+		this.authApi = new AuthApi();
 	}
 
 	postRegistro = asyncHandler(async(req, res, next) => {
@@ -45,6 +45,24 @@ class AuthController{
 				});
 		})(req, res, next);
 	});
+
+	resetPasswordRequest = asyncHandler(async(req, res) => {
+		try {
+			await this.authApi.resetPasswordRequest(req.body.email);
+			res.status(200).json({success: true, message: 'mail enviado'});
+		} catch (error) {
+			res.status(500).json({success: false, message: 'mail no enviado, probar de nuevo'});
+		}
+	}); 
+
+	resetPassword = asyncHandler(async(req, res) => {
+		try {
+			await this.authApi.resetPassword(req.params.token, req.body.newPassword, req.body.confirmNewPassword);
+			res.status(200).json({success: true, message: 'contrasenia actualizada'});
+		} catch (error) {
+			res.status(500).json({success: false, message: 'hubo un error ' + error});
+		}
+	}); 
 }
 
 module.exports = AuthController;

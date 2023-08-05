@@ -6,6 +6,7 @@ const PostComment = require('./postComment');
 const Post = require('./post');
 const Like = require('./like');
 const CommentReply = require('./commentReply');
+const ResetPasswordToken = require('./resetPasswordToken');
 
 const User = sequelize.define('User',{
 	id: {
@@ -57,5 +58,8 @@ Like.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'}); */
 
 /* PostComment.hasMany(CommentReply, { foreignKey: 'comment_id', sourceKey: 'id' });
 CommentReply.hasMany(PostComment, { foreignKey: 'comment_id', sourceKey: 'id' }); */
+
+User.hasOne(ResetPasswordToken, {foreignKey: 'user_id', sourceKey: 'id'});
+ResetPasswordToken.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
 
 module.exports = User;

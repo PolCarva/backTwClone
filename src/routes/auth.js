@@ -10,7 +10,9 @@ class AuthRouter{
 		authRouter.post('/register', this.controller.postRegistro);
 		authRouter.post('/login', this.controller.postLogin);
 		//authRouter.get('/logout', this.controller.getLogout);
-
+		authRouter.post('/resetpasswordrequest', this.controller.resetPasswordRequest);
+		authRouter.post('/resetpassword/:token', this.controller.resetPassword);
+		
 		return authRouter;
 	}
 }
