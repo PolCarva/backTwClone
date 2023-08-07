@@ -32,26 +32,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //RUTAS
-app.get('/', (req, res) => {
-	res.send('hola a todos');
-});
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
 const FollowersListsRouter  = require('./routes/followersLists');
 const FollowingListsRouter  = require('./routes/followingLists');
 const PostCommentsRouter  = require('./routes/postComments');
+const CommentRepliesRouter  = require('./routes/commentReplies');
+const NotificationsRouter  = require('./routes/notifications');
 
 const authRouter = new AuthRouter();
 const postsRouter = new PostsRouter();
 const followersListsRouter = new FollowersListsRouter();
 const followingListsRouter = new FollowingListsRouter();
 const postCommentsRouter = new PostCommentsRouter();
+const commentRepliesRouter = new CommentRepliesRouter();
+const notificationsRouter = new NotificationsRouter();
 
 app.use('/api', authRouter.start());
 app.use('/api', postsRouter.start());
 app.use('/api', followersListsRouter.start());
 app.use('/api', followingListsRouter.start());
 app.use('/api', postCommentsRouter.start());
+app.use('/api', commentRepliesRouter.start());
+app.use('/api', notificationsRouter.start());
 
 module.exports = httpServer;

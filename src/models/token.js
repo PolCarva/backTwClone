@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelizeConfig');
 
-const ResetPasswordToken = sequelize.define('ResetPasswordToken',{
+const Token = sequelize.define('Token',{
 	id: {
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
@@ -16,4 +16,4 @@ const ResetPasswordToken = sequelize.define('ResetPasswordToken',{
 
 
 
-module.exports = ResetPasswordToken;
+module.exports = Token;

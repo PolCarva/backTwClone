@@ -1,12 +1,12 @@
-const httpServer = require('./app');
+const httpServer = require('./src/app');
 const cluster = require('cluster');
 const os = require('os');
-const logger = require('./utils/logger');
-const sequelize = require('./config/sequelizeConfig');
-require('./models/user_followersList');
-require('./models/user_followingList');
-require('./models/post');
-require('./models/user');
+const logger = require('./src/utils/logger');
+const sequelize = require('./src/config/sequelizeConfig');
+require('./src/models/user_followersList');
+require('./src/models/user_followingList');
+require('./src/models/post');
+require('./src/models/user');
 
 
 async function server (){

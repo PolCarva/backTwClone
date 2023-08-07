@@ -1,11 +1,11 @@
-const ResetPasswordToken = require('../models/resetPasswordToken');
+const Token = require('../models/token');
 const logger = require('../utils/logger');
 
-class ResetPasswordTokenDAO{
+class TokenDAO{
 
 	async findOneTokenByToken(token){
 		try{
-			return ResetPasswordToken.findOne({token});
+			return Token.findOne({token});
 		}catch(err){
 			logger.info(err);
 		}
@@ -13,7 +13,7 @@ class ResetPasswordTokenDAO{
 
 	async findOneTokenByUser(userId){
 		try{
-			return ResetPasswordToken.findOne({user_id: userId});
+			return Token.findOne({user_id: userId});
 		}catch(err){
 			logger.info(err);
 		}
@@ -21,11 +21,11 @@ class ResetPasswordTokenDAO{
 
 	async deleteOneToken(){
 		try {
-			return await ResetPasswordToken.destroy();
+			return await Token.destroy();
 		} catch (err) {
 			logger.info(err);
 		}
 	}
 }
 
-module.exports = ResetPasswordTokenDAO;
+module.exports = TokenDAO;

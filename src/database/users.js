@@ -66,6 +66,26 @@ class UsersDAO{
 			logger.info(err);
 		}
 	}
+
+	async deleteUser(userId){
+		try{
+			return User.destroy({id: userId});
+		}catch(err){
+			logger.info(err);
+		}
+	}
+
+	async activateUser(userId){
+		try {
+			return User.update({activated: true}, {
+				where:{
+					id: userId
+				}
+			});
+		} catch (err) {
+			logger.info(err);
+		}
+	}
 }
 
 module.exports = UsersDAO;

@@ -70,6 +70,10 @@ passport.use('login', new localStrategy({
 		return done('usuario o contrasenia incorrectos');
 	} 
 
+	if(!user.activated){
+		return done('usuario no activado');
+	}
+
 	return done(null, user);
 }
 ));

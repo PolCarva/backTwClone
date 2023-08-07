@@ -18,6 +18,10 @@ class UsersApi{
 
 	async updateUserData(){
 	}
+
+	async deleteUser(userId){
+		return await this.usersDAO.deleteUser(userId);
+	}
 }
 
 module.exports = UsersApi;

@@ -1,11 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const FollowingListsApi = require('../services/followingLists');
 const FollowersListsApi = require('../services/followersLists');
+const NotificationsApi = require('../services/notifications');
+const { newFollowerTitle, newFollowerMessage } = require('../utils/notificationsMessages');
 
 class FollowingListsController{
 	constructor(){
 		this.followingListsApi = new FollowingListsApi();
 		this.followersListsApi = new FollowersListsApi();
+		this.notificationsApi = new NotificationsApi();
 	}
 
 	getFollowingList = asyncHandler(async(req, res) => {
@@ -21,6 +24,7 @@ class FollowingListsController{
 		try {
 			await this.followingListsApi.addUserToFollowingList(req.params.userid, req.user.id);
 			await this.followersListsApi.addUserToFollowersList(req.user.id, req.params.userid);
+			await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(req.user.username), req.params.userid);
 			res.json({success: true, message: `usuario ${req.params.userid} agregado a la lista de seguidos de ${req.user.id}`}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);

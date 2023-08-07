@@ -6,7 +6,8 @@ const PostComment = require('./postComment');
 const Post = require('./post');
 const Like = require('./like');
 const CommentReply = require('./commentReply');
-const ResetPasswordToken = require('./resetPasswordToken');
+const Token = require('./token');
+const Notification = require('./notification');
 
 const User = sequelize.define('User',{
 	id: {
@@ -29,10 +30,17 @@ const User = sequelize.define('User',{
 	email:{
 		type: DataTypes.STRING,
 		allowNull: false
+	},
+	activated:{
+		type: DataTypes.BOOLEAN,
+		defaultValue: false
 	}
 }, {
-	underscored: true,
-	timestamps: false
+	underscored: true
+});
+
+User.beforeCreate(async (user, options) => {
+	user.username = '@' + user.username;
 });
 
 User.hasOne(FollowersList, { foreignKey: 'user_id', sourceKey: 'id' });
@@ -47,6 +55,9 @@ PostComment.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 User.hasMany(Post, { foreignKey: 'user_id', sourceKey: 'id' });
 Post.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
+User.hasMany(Notification, { foreignKey: 'user_id', sourceKey: 'id' });
+Notification.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' });
+
 Post.hasMany(PostComment, { foreignKey: 'post_id', sourceKey: 'id' });
 PostComment.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'});
 
@@ -56,10 +67,10 @@ Like.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 Post.hasMany(Like, { foreignKey: 'post_id', sourceKey: 'id' });
 Like.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'}); */
 
-/* PostComment.hasMany(CommentReply, { foreignKey: 'comment_id', sourceKey: 'id' });
-CommentReply.hasMany(PostComment, { foreignKey: 'comment_id', sourceKey: 'id' }); */
+PostComment.hasMany(CommentReply, { foreignKey: 'comment_id', sourceKey: 'id' });
+CommentReply.belongsTo(PostComment, { foreignKey: 'comment_id', sourceKey: 'id' });
 
-User.hasOne(ResetPasswordToken, {foreignKey: 'user_id', sourceKey: 'id'});
-ResetPasswordToken.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
+User.hasOne(Token, {foreignKey: 'user_id', sourceKey: 'id'});
+Token.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
 
 module.exports = User;

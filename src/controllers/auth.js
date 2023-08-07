@@ -2,31 +2,55 @@ const asyncHandler = require('express-async-handler');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const AuthApi = require('../services/auth');
+const UsersApi = require('../services/users');
+const NotificationsApi = require('../services/notifications');
+const { welcomeMessage, welcomeTitle } = require('../utils/notificationsMessages');
 
 class AuthController{
 	constructor(){
 		this.authApi = new AuthApi();
+		this.usersApi = new UsersApi();
+		this.notificationsApi = new NotificationsApi();
 	}
 
 	postRegistro = asyncHandler(async(req, res, next) => {
-		passport.authenticate('register', function(err, user, info) {
-			if (err) { 
-				return next(err); 
-			}
-			if (!user) {
-				return res.status(400).json({ message: info.message });
-			}
-			req.login(user,
-				{ session: false },
-				async (error) => {
-					if (error) return next(error);              
-					const token = jwt.sign({ id: user.id}, 'adsfdcsfeds3w423ewdas');
-    
-					return res.status(201).json({ message: 'usuario registrado', user: req.user, token: `${token}` });
+		const newUserPromise = new Promise((resolve, reject) => {
+			passport.authenticate('register', async function (err, user, info) {
+				if (err) {
+					return reject(err);
+				}
+				if (!user) {
+					return res.status(400).json({ message: info.message });
+				}
+				req.login(user, { session: false }, async (error) => {
+					if (error) return reject(error);
+					resolve(user);
 				});
-		})(req, res, next);
-	});  
+			})(req, res, next);
+		});
+		
+		try {
+			const newUser = await newUserPromise;
+			await this.authApi.verificateEmail(newUser.email, newUser.id);
+			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail' });
+		} catch (err) {
+			next(err);
+		}
+	});	  
 
+	validateUser = asyncHandler(async (req, res) => {
+		try {
+			const {token} = req.params;
+			await this.authApi.validateUser(token);
+			const user = await this.authApi.findOneTokenByToken(token);
+			const jwtToken = jwt.sign({ id: user.user_id}, 'adsfdcsfeds3w423ewdas');
+			await this.notificationsApi.createNotification(welcomeTitle(), welcomeMessage(), user.id);
+			res.status(201).json({ success: true, message: 'usuario validado', token: jwtToken  });
+		} catch (error) {
+			console.log(error);
+			res.status(500).json({success: false, message: 'hubo un error ' + error});
+		}
+	});
 
 	postLogin = asyncHandler(async (req, res, next) => {
 		passport.authenticate('login', (err, user, info) => {
@@ -41,7 +65,7 @@ class AuthController{
 				async (error) => {
 					if (error) return next(error);            
 					const token = jwt.sign({ id: user.id}, 'adsfdcsfeds3w423ewdas');
-					return res.status(201).json({ message: 'sesion iniciada', token: `${token}` });
+					return res.status(201).json({ success: true, message: 'sesion iniciada', token: `${token}` });
 				});
 		})(req, res, next);
 	});
