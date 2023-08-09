@@ -8,6 +8,7 @@ const Like = require('./like');
 const CommentReply = require('./commentReply');
 const Token = require('./token');
 const Notification = require('./notification');
+const SavedPostsList = require('./savedPostsList');
 
 const User = sequelize.define('User',{
 	id: {
@@ -39,7 +40,7 @@ const User = sequelize.define('User',{
 	underscored: true
 });
 
-User.beforeCreate(async (user, options) => {
+User.beforeCreate(async (user) => {
 	user.username = '@' + user.username;
 });
 
@@ -48,6 +49,9 @@ FollowersList.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
 User.hasOne(FollowingList, { foreignKey: 'user_id', sourceKey: 'id' });
 FollowingList.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
+
+User.hasOne(SavedPostsList, { foreignKey: 'user_id', sourceKey: 'id' });
+SavedPostsList.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
 User.hasMany(PostComment, { foreignKey: 'user_id', sourceKey: 'id' });
 PostComment.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});

@@ -5,7 +5,11 @@ class TokenDAO{
 
 	async findOneTokenByToken(token){
 		try{
-			return Token.findOne({token});
+			return await Token.findOne({
+				where: {
+					token
+				}
+			});
 		}catch(err){
 			logger.info(err);
 		}

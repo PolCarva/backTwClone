@@ -5,6 +5,7 @@ const logger = require('./src/utils/logger');
 const sequelize = require('./src/config/sequelizeConfig');
 require('./src/models/user_followersList');
 require('./src/models/user_followingList');
+require('./src/models/post_savedPostsList');
 require('./src/models/post');
 require('./src/models/user');
 

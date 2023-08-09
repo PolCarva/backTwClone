@@ -14,6 +14,9 @@ const followersListsDAO = new FollowersListsDAO();
 const FollowingListsDAO = require('../database/followingLists');
 const followingListsDAO = new FollowingListsDAO();
 
+const SavedPostsListsDAO = require('../database/savedPostsLists');
+const savedPostsListsDAO = new SavedPostsListsDAO();
+
 passport.use('register', new localStrategy({
 	passReqToCallback: true
 }, async(req, username, password, done) => {
@@ -48,6 +51,7 @@ passport.use('register', new localStrategy({
 	
 	await followersListsDAO.createFollowersList(newUser.id);
 	await followingListsDAO.createFollowingList(newUser.id);
+	await savedPostsListsDAO.createSavedPostsList(newUser.id);
 
 	done(null, newUser);}
 ));

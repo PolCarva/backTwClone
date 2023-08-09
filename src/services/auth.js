@@ -38,10 +38,8 @@ class AuthApi{
 	}
 
 	async validateUser(tokenParam){
-		const newToken = tokenParam.slice(0, -1);
-		const token = await this.TokenDAO.findOneTokenByToken(newToken);
-		
-		await this.usersDAO.activateUser(token.user_id);
+		const token = await this.TokenDAO.findOneTokenByToken(tokenParam);
+		await this.usersDAO.activateUser(token.dataValues.user_id);
 	}
 
 	async deleteUserIfNotValidated(){
@@ -97,8 +95,7 @@ class AuthApi{
 	}
 
 	async findOneTokenByToken(tokenParam){
-		const newToken = tokenParam.slice(0, -1);
-		return await this.TokenDAO.findOneTokenByToken(newToken);
+		return await this.TokenDAO.findOneTokenByToken(tokenParam);
 	}
 }
 

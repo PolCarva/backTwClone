@@ -1,4 +1,5 @@
 const FollowersList = require('../models/followersList');
+const UserFollowersList = require('../models/user_followersList');
 const logger = require('../utils/logger');
 
 class FollowersListDAO{
@@ -13,8 +14,8 @@ class FollowersListDAO{
 
 	async getFollowersList(userId){
 		try {
-			return await FollowersList.findOne({ 
-				where: { user_id: userId } 
+			return await UserFollowersList.findAll({ 
+				where: { follower_list_id: userId } 
 			});
 		} catch (err) {
 			logger.info(err);

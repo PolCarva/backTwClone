@@ -43,7 +43,7 @@ class AuthController{
 			const {token} = req.params;
 			await this.authApi.validateUser(token);
 			const user = await this.authApi.findOneTokenByToken(token);
-			const jwtToken = jwt.sign({ id: user.user_id}, 'adsfdcsfeds3w423ewdas');
+			const jwtToken = jwt.sign({ id: user.dataValues.user_id}, 'adsfdcsfeds3w423ewdas');
 			await this.notificationsApi.createNotification(welcomeTitle(), welcomeMessage(), user.id);
 			res.status(201).json({ success: true, message: 'usuario validado', token: jwtToken  });
 		} catch (error) {
