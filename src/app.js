@@ -33,6 +33,10 @@ app.use(passport.session());
 
 //ROUTES
 
+app.get('/', (req, res) => {
+	res.send('hola mundo');
+});
+
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
 const FollowersListsRouter  = require('./routes/followersLists');
