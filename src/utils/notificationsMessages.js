@@ -22,6 +22,14 @@ const newCommentReplyMessage = (commentUser) => {
 	return `${commentUser} respondio tu comentario`;
 };
 
+const postRetweetedTitle = () => {
+	return 'tu post recibio un retweet!';
+};
+
+const postRetweetedMessage = (commentUser) => {
+	return `${commentUser} retuiteo tu post`;
+};
+
 const welcomeTitle = () => {
 	return 'Bienvenido a la app';
 };
@@ -37,6 +45,8 @@ module.exports = {
 	newCommentMessage,
 	newCommentReplyTitle,
 	newCommentReplyMessage,
+	postRetweetedTitle,
+	postRetweetedMessage,
 	welcomeTitle,
 	welcomeMessage
 };

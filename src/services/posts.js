@@ -11,19 +11,15 @@ class PostsApi{
 		return await this.postsDAO.createPost({user_id: userId, text});
 	}    
 
-	async getPosts(userId){
+	async getHomePosts(userId){
 		const userFollowingList = await this.usersFollowingListsDAO.getUserFollowingList(userId);
 		const followingListUsersIds = userFollowingList.map(list => list.dataValues.users_ids);
 
-		return await this.postsDAO.getPosts(followingListUsersIds);
+		return await this.postsDAO.getHomePosts(followingListUsersIds);
 	}
 
 	async deletePost(postId){
 		return await this.postsDAO.deletePost(postId);
-	}
-
-	async getMyPosts(userId){
-		return await this.postsDAO.getMyPosts(userId);
 	}
 
 	async getUserPosts(userId){

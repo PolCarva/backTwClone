@@ -5,6 +5,7 @@ const FollowingList = require('./followingList');
 const PostComment = require('./postComment');
 const Post = require('./post');
 const Like = require('./like');
+const Retweet = require('./retweet');
 const CommentReply = require('./commentReply');
 const Token = require('./token');
 const Notification = require('./notification');
@@ -64,6 +65,12 @@ Notification.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id' });
 
 Post.hasMany(PostComment, { foreignKey: 'post_id', sourceKey: 'id' });
 PostComment.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'});
+
+Post.hasMany(Retweet, { foreignKey: 'post_id', sourceKey: 'id' });
+Retweet.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'});
+
+User.hasMany(Retweet, { foreignKey: 'user_id', sourceKey: 'id' });
+Retweet.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
 /* User.hasMany(Like, { foreignKey: 'user_id', sourceKey: 'id' });
 Like.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});

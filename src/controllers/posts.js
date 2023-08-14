@@ -15,9 +15,9 @@ class PostsController{
 		}
 	});  
 
-	getPosts = asyncHandler(async(req, res) => {
+	getHomePosts = asyncHandler(async(req, res) => {
 		try {
-			const posts = await this.postsApi.getPosts(req.user.id);
+			const posts = await this.postsApi.getHomePosts(req.user.id);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
@@ -35,7 +35,7 @@ class PostsController{
 
 	getMyPosts = asyncHandler(async(req, res) => {
 		try {
-			const posts = await this.postsApi.getMyPosts(req.user.id);
+			const posts = await this.postsApi.getUserPosts(req.user.id);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
@@ -44,7 +44,7 @@ class PostsController{
 
 	getUserPosts = asyncHandler(async(req, res) => {
 		try {
-			const posts = await this.postsApi.getMyPosts(req.params.usuarioid);
+			const posts = await this.postsApi.getUserPosts(req.params.usuarioid);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);

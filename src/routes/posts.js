@@ -9,7 +9,7 @@ class PostsRouter{
 
 	start(){
 		postsRouter.post('/crearpost', authMiddleware, this.controller.createPost);
-		postsRouter.get('/posts', authMiddleware, this.controller.getPosts);
+		postsRouter.get('/posts', authMiddleware, this.controller.getHomePosts);
 		postsRouter.post('/eliminarpost/:postid', authMiddleware, this.controller.deletePost);
 		postsRouter.get('/misposts', authMiddleware, this.controller.getMyPosts);
 		postsRouter.get('/postsusuario/:usuarioid', authMiddleware, this.controller.getUserPosts);

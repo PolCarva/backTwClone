@@ -12,7 +12,7 @@ class PostsDAO{
 		}
 	}
 
-	async getPosts(following){
+	async getHomePosts(following){
 		try{
 			return await Post.findAll({
 				where:{
@@ -40,18 +40,6 @@ class PostsDAO{
 			logger.info(err);
 		}
 	} */
-
-	async getMyPosts(userId){
-		try{
-			return await Post.findAll({
-				where:{
-					user_id: userId
-				}
-			});
-		}catch(err){
-			logger.info(err);
-		}
-	}
 
 	async getUserPosts(userId){
 		try{

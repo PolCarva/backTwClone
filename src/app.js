@@ -31,7 +31,7 @@ app.use(cors({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//RUTAS
+//ROUTES
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
@@ -41,6 +41,7 @@ const PostCommentsRouter  = require('./routes/postComments');
 const CommentRepliesRouter  = require('./routes/commentReplies');
 const NotificationsRouter  = require('./routes/notifications');
 const SavedPostsListsRouter  = require('./routes/savedPostsLists');
+const RetweetsRouter  = require('./routes/retweets');
 
 const authRouter = new AuthRouter();
 const postsRouter = new PostsRouter();
@@ -50,6 +51,7 @@ const postCommentsRouter = new PostCommentsRouter();
 const commentRepliesRouter = new CommentRepliesRouter();
 const notificationsRouter = new NotificationsRouter();
 const savedPostsListsRouter = new SavedPostsListsRouter();
+const retweetsRouter = new RetweetsRouter();
 
 app.use('/api', authRouter.start());
 app.use('/api', postsRouter.start());
@@ -59,5 +61,6 @@ app.use('/api', postCommentsRouter.start());
 app.use('/api', commentRepliesRouter.start());
 app.use('/api', notificationsRouter.start());
 app.use('/api', savedPostsListsRouter.start());
+app.use('/api', retweetsRouter.start());
 
 module.exports = httpServer;

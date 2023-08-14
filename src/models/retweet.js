@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelizeConfig');
 
-const Like = sequelize.define('Like',{
+const Retweet = sequelize.define('Retweet',{
 	id: {
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
@@ -12,4 +12,4 @@ const Like = sequelize.define('Like',{
 });
 
 
-module.exports = Like;
+module.exports = Retweet;

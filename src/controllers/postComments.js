@@ -1,8 +1,8 @@
 const asyncHandler = require('express-async-handler');
 const PostCommentsApi = require('../services/postComments');
 const NotificationsApi = require('../services/notifications');
-const { newCommentTitle, newCommentMessage } = require('../utils/notificationsMessages');
 const PostsApi = require('../services/posts');
+const { newCommentTitle, newCommentMessage } = require('../utils/notificationsMessages');
 
 class PostCommentsController{
 	constructor(){
