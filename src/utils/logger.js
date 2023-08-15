@@ -18,4 +18,4 @@ if (process.env.NODE_ENV == 'prod') {
 	logger = buildProdLogger();
 }
 
-module.exports = logger
+module.exports = logger;
