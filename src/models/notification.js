@@ -14,6 +14,10 @@ const Notification = sequelize.define('Notification',{
 	message:{
 		type: DataTypes.TEXT,
 		allowNull: false
+	},
+	readed:{
+		type: DataTypes.BOOLEAN,
+		defaultValue: false
 	}
 }, {
 	underscored: true

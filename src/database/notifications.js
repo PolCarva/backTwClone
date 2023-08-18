@@ -23,6 +23,18 @@ class NotificationsDAO{
 		}
 	}
 
+	async markNotificationAsReaded(){
+		try {
+			return await Notification.update({ readed: true }, {
+				where: {
+					readed: false,
+				},
+			});
+		} catch (err) {
+			logger.info(err);
+		}
+	}
+
 	async mentions(){
 		try{
 			
