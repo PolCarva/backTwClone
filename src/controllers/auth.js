@@ -32,7 +32,7 @@ class AuthController{
 		try {
 			const newUser = await newUserPromise;
 			await this.authApi.verificateEmail(newUser.email, newUser.id);
-			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail', user });
+			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail', user: newUser });
 		} catch (err) {
 			next(err);
 		}

@@ -53,6 +53,7 @@ const CommentRepliesRouter  = require('./routes/commentReplies');
 const NotificationsRouter  = require('./routes/notifications');
 const SavedPostsListsRouter  = require('./routes/savedPostsLists');
 const RetweetsRouter  = require('./routes/retweets');
+const LikesRouter  = require('./routes/likes');
 
 const authRouter = new AuthRouter();
 const postsRouter = new PostsRouter();
@@ -63,6 +64,7 @@ const commentRepliesRouter = new CommentRepliesRouter();
 const notificationsRouter = new NotificationsRouter();
 const savedPostsListsRouter = new SavedPostsListsRouter();
 const retweetsRouter = new RetweetsRouter();
+const likesRouter = new LikesRouter();
 
 app.use('/api', authRouter.start());
 app.use('/api', postsRouter.start());
@@ -73,5 +75,6 @@ app.use('/api', commentRepliesRouter.start());
 app.use('/api', notificationsRouter.start());
 app.use('/api', savedPostsListsRouter.start());
 app.use('/api', retweetsRouter.start());
+app.use('/api', likesRouter.start());
 
 module.exports = httpServer;

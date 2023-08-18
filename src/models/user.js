@@ -72,11 +72,17 @@ Retweet.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'});
 User.hasMany(Retweet, { foreignKey: 'user_id', sourceKey: 'id' });
 Retweet.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
-/* User.hasMany(Like, { foreignKey: 'user_id', sourceKey: 'id' });
+User.hasMany(Like, { foreignKey: 'user_id', sourceKey: 'id' });
 Like.belongsTo(User, { foreignKey: 'user_id', targetKey: 'id'});
 
 Post.hasMany(Like, { foreignKey: 'post_id', sourceKey: 'id' });
-Like.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'}); */
+Like.belongsTo(Post, { foreignKey: 'post_id', targetKey: 'id'}); 
+
+PostComment.hasMany(Like, { foreignKey: 'post_comment_id', sourceKey: 'id' });
+Like.belongsTo(PostComment, { foreignKey: 'post_comment_id', targetKey: 'id'}); 
+
+CommentReply.hasMany(Like, { foreignKey: 'comment_reply_id', sourceKey: 'id' });
+Like.belongsTo(CommentReply, { foreignKey: 'comment_reply_id', targetKey: 'id'}); 
 
 PostComment.hasMany(CommentReply, { foreignKey: 'comment_id', sourceKey: 'id' });
 CommentReply.belongsTo(PostComment, { foreignKey: 'comment_id', sourceKey: 'id' });

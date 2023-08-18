@@ -6,6 +6,10 @@ const Like = sequelize.define('Like',{
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
 		primaryKey: true
+	},
+	remove_like:{
+		type: DataTypes.BOOLEAN,
+		defaultValue: true
 	}
 }, {
 	underscored: true
