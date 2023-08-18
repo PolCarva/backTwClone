@@ -29,7 +29,9 @@
     "pg": "^8.11.1",
     "pg-hstore": "^2.3.4",
     "pino": "^8.14.1",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

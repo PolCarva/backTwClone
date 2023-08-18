@@ -5,6 +5,7 @@ const sequelize = new Sequelize('socialMedia', 'postgres', 'Marruecos02',{
 	dialectModule: pg,
 	host: 'database-2.crlokgsryokm.us-east-1.rds.amazonaws.com',
 	dialect:  'postgres',
+	//port: process.env.POSTGRESQL_PORT,
 	logging: false,
 	ssl: true,
 	dialectOptions: {

@@ -6,6 +6,12 @@ const session = require('cookie-session');
 const cors = require('cors');
 const{ Server: HttpServer } = require('http');
 
+//SWAGGER
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerSpec = require('./config/swaggerSpec');
+
+//SETTINGS
 const app = express(); 
 const httpServer = new HttpServer(app);
 
@@ -34,12 +40,9 @@ app.use(cors({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 //ROUTES
-
-app.get('/home', (req, res) => {
-	res.send('hola mundo 3');
-});
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');

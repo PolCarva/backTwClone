@@ -32,7 +32,7 @@ class AuthController{
 		try {
 			const newUser = await newUserPromise;
 			await this.authApi.verificateEmail(newUser.email, newUser.id);
-			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail' });
+			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail', user });
 		} catch (err) {
 			next(err);
 		}
@@ -65,7 +65,7 @@ class AuthController{
 				async (error) => {
 					if (error) return next(error);            
 					const token = jwt.sign({ id: user.id}, 'adsfdcsfeds3w423ewdas');
-					return res.status(201).json({ success: true, message: 'sesion iniciada', token: `${token}` });
+					return res.status(201).json({ success: true, message: 'sesion iniciada', token: `${token}`, user });
 				});
 		})(req, res, next);
 	});
