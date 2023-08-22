@@ -10,7 +10,7 @@ class UsersController{
 		try {
 			const{username, fullName} = req.body;
 			const{id} = req.user;
-			await this.usersApi.updateUserData(req.files.profilePhoto, id, username, fullName, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/user${id}`);
+			//await this.usersApi.updateUserData(req.files.profilePhoto, id, username, fullName, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/user${id}`);
 
 			res.json({success: true, message: 'usuario actualizado'}).status(200);
 		} catch (err) {
