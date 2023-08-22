@@ -11,7 +11,7 @@ require('./src/models/user');
 
 
 async function server (){
-	const numCpus = os.cpus().length;
+/* 	const numCpus = os.cpus().length;
 
 	if(cluster.isPrimary){
 		logger.info(numCpus);
@@ -25,7 +25,7 @@ async function server (){
 			logger.info(worker.process.pid);
 			cluster.fork();
 		});
-	}else{
+	}else{ */
 
 		await sequelize.sync({alter: true}).then(() => {
 			logger.info('All models were synchronized successfully.');
@@ -40,7 +40,7 @@ async function server (){
 		});
 
 		server.on('error', err => logger.info(err));
-	}
+	/* } */
 }
 
 server();
