@@ -59,9 +59,13 @@ class UsersDAO{
 		}
 	}
 
-	async updateUserData(userId){
+	async updateUserData(userId, username, fullName, profilePhoto){
 		try{
-			return User.update({id: userId}, {});
+			return User.update({username, full_name: fullName, profile_photo: profilePhoto}, {
+				where: {
+					id: userId
+				}
+			});
 		}catch(err){
 			logger.info(err);
 		}

@@ -36,7 +36,8 @@ const User = sequelize.define('User',{
 	activated:{
 		type: DataTypes.BOOLEAN,
 		defaultValue: false
-	}
+	},
+	profile_photo: DataTypes.STRING
 }, {
 	underscored: true
 });

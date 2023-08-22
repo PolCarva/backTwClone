@@ -8,7 +8,10 @@ const Post = sequelize.define('Post',{
 		primaryKey: true
 	},
 	text:{
-		type: DataTypes.TEXT,
+		type: DataTypes.TEXT
+	},
+	file:{
+		type: DataTypes.STRING
 	}
 }, {
 	underscored: true

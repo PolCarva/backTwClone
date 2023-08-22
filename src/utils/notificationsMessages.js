@@ -35,7 +35,7 @@ const welcomeTitle = () => {
 };
 
 const welcomeMessage = () => {
-	return 'lucas lorenzo te da la bienvenida a esta gran red social';
+	return 'lucas y pablo te dan la bienvenida a esta gran red social';
 };
 
 module.exports = {

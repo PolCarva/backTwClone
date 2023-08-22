@@ -4,6 +4,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 const session = require('cookie-session');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 const{ Server: HttpServer } = require('http');
 
 //SWAGGER
@@ -38,6 +39,10 @@ app.use(cors({
 	allowedHeaders: ['Access-Control-Allow-Origin', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 	credentials: true
 }));
+app.use(fileUpload({
+	useTempFiles: true,
+	tempFileDir: './uploads'
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
@@ -54,6 +59,7 @@ const NotificationsRouter  = require('./routes/notifications');
 const SavedPostsListsRouter  = require('./routes/savedPostsLists');
 const RetweetsRouter  = require('./routes/retweets');
 const LikesRouter  = require('./routes/likes');
+const UsersRouter  = require('./routes/users');
 
 const authRouter = new AuthRouter();
 const postsRouter = new PostsRouter();
@@ -65,6 +71,7 @@ const notificationsRouter = new NotificationsRouter();
 const savedPostsListsRouter = new SavedPostsListsRouter();
 const retweetsRouter = new RetweetsRouter();
 const likesRouter = new LikesRouter();
+const usersRouter = new UsersRouter();
 
 app.use('/api', authRouter.start());
 app.use('/api', postsRouter.start());
@@ -76,5 +83,6 @@ app.use('/api', notificationsRouter.start());
 app.use('/api', savedPostsListsRouter.start());
 app.use('/api', retweetsRouter.start());
 app.use('/api', likesRouter.start());
+app.use('/api', usersRouter.start());
 
 module.exports = httpServer;

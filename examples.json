@@ -1,0 +1,62 @@
+//USERS
+
+[ {
+    "activated": true,
+    "id": 2,
+    "username": "@lucas",
+    "email": "lucasalorenzo2002@gmail.com",
+    "full_name": "lucas lorenzo",
+    "password": "$2b$10$PlbYocmZe.pdzq9mBctmaOuL1kc83oyYcCOhDbUDG5RL7e9n/RU1C",
+    "updatedAt": "2023-08-21T17:36:10.495Z",
+    "createdAt": "2023-08-21T17:36:10.495Z",
+    "profile_photo": null
+  }, {
+    "activated": true,
+    "id": 3,
+    "username": "@lucas2",
+    "email": "asesoriaslal@gmail.com",
+    "full_name": "lucas lorenzo2",
+    "password": "$2b$10$n6cyN74ETnGTATmMRW8exONy0M/wAFRi89fUZGPNGKdXi3FjfDZsK",
+    "updatedAt": "2023-08-21T17:38:36.182Z",
+    "createdAt": "2023-08-21T17:38:36.182Z",
+    "profile_photo": null
+  }
+]
+
+//POSTS
+[
+    {
+      "id": 4,
+      "text": "segundo post lucas",
+      "createdAt": "2023-08-21T17:44:51.575Z",
+      "updatedAt": "2023-08-21T17:44:51.575Z",
+      "user_id": 2
+    },
+    {
+      "id": 3,
+      "text": "primer post lucas",
+      "createdAt": "2023-08-21T17:44:41.837Z",
+      "updatedAt": "2023-08-21T17:44:41.837Z",
+      "user_id": 2
+    }
+]
+
+//COMENTARIOS
+[
+    {
+      "id": 2,
+      "comment": "segundo comentario post 2",
+      "createdAt": "2023-08-21T18:01:43.942Z",
+      "updatedAt": "2023-08-21T18:01:43.942Z",
+      "user_id": 3,
+      "post_id": 2
+    },
+    {
+      "id": 1,
+      "comment": "primer comentario post 2",
+      "createdAt": "2023-08-21T17:52:51.076Z",
+      "updatedAt": "2023-08-21T17:52:51.076Z",
+      "user_id": 2,
+      "post_id": 2
+    }
+  ]
