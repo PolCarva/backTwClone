@@ -1,6 +1,6 @@
 const PostsDAO = require('../database/posts');
 const UsersFollowingListsDAO = require('../database/users_followingLists');
-//const {uploadFile, readFile} = require('../utils/awsS3');
+const {uploadFile, readFile} = require('../utils/awsS3');
 
 class PostsApi{
 	constructor(){
@@ -9,7 +9,7 @@ class PostsApi{
 	}
     
 	async createPost(postFile, userId, text, file){
-		//await uploadFile(postFile, `user${userId}`);
+		await uploadFile(postFile, `user${userId}`);
 		return await this.postsDAO.createPost({user_id: userId, text, file});
 	}    
 

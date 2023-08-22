@@ -8,7 +8,7 @@ class PostsController{
 
 	createPost = asyncHandler(async(req, res) => {
 		try {
-			await this.postsApi.createPost(req.user.id, req.body.text, /* `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/post-user${req.user.id}` */);
+			await this.postsApi.createPost(req.user.id, req.body.text, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/post-user${req.user.id}`);
 			res.json({success: true, message: 'post creado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
