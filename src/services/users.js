@@ -1,5 +1,5 @@
 const UsersDAO = require('../database/users');
-const {uploadFile, readFile} = require('../utils/awsS3');
+//const {uploadFile, readFile} = require('../utils/awsS3');
 
 class UsersApi{
 	constructor(){
@@ -18,7 +18,7 @@ class UsersApi{
 	}
 
 	async updateUserData(profilePhotoFile, userId, username, fullName, profilePhotoS3){
-		await uploadFile(profilePhotoFile, `user${userId}`);
+		//await uploadFile(profilePhotoFile, `user${userId}`);
 		return await this.usersDAO.updateUserData(userId, username, fullName, profilePhotoS3);
 	}
 

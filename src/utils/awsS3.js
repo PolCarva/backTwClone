@@ -1,4 +1,4 @@
-const {S3Client, PutObjectCommand, GetObjectCommand} = require('@aws-sdk/client-s3');
+/* const {S3Client, PutObjectCommand, GetObjectCommand} = require('@aws-sdk/client-s3');
 const fs = require('fs');
 require('dotenv').config();
 
@@ -35,4 +35,4 @@ async function readFile(imageName){
 module.exports = {
 	uploadFile,
 	readFile
-};
+}; */
