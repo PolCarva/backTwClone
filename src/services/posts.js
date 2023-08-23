@@ -8,8 +8,8 @@ class PostsApi{
 		this.usersFollowingListsDAO = new UsersFollowingListsDAO();
 	}
     
-	async createPost(postFile, userId, text, file){
-		await uploadFile(postFile, `user${userId}`);
+	async createPost(/* postFile,  */userId, text/* , file */){
+		//await uploadFile(postFile, `user${userId}`);
 		return await this.postsDAO.createPost({user_id: userId, text, file});
 	}    
 
