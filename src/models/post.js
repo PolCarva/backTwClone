@@ -8,7 +8,7 @@ const Post = sequelize.define('Post',{
 		primaryKey: true
 	},
 	text:{
-		type: DataTypes.TEXT
+		type: DataTypes.STRING
 	},
 	file:{
 		type: DataTypes.STRING
