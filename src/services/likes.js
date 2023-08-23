@@ -1,11 +1,14 @@
 const LikesDAO = require('../database/likes');
+const NotificationsApi = require('../services/notifications');
 
 class LikesApi{
 	constructor(){
 		this.likesDAO = new LikesDAO();
+		this.notificationsApi = new NotificationsApi();
 	}
     
 	async likePost(userId, postId){
+		//this.notificationsApi.createNotification(lik)
 		return await this.likesDAO.createLike({user_id: userId, post_id: postId});
 	}
 

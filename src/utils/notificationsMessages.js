@@ -38,6 +38,14 @@ const welcomeMessage = () => {
 	return 'lucas y pablo te dan la bienvenida a esta gran red social';
 };
 
+const likeTitle = () => {
+	return 'Recibiste un like';
+};
+
+const likeMessage = (usuario, likeado) => {
+	return `${usuario} dio like a tu ${likeado}`;
+};
+
 module.exports = {
 	newFollowerTitle,
 	newFollowerMessage,
@@ -48,5 +56,7 @@ module.exports = {
 	postRetweetedTitle,
 	postRetweetedMessage,
 	welcomeTitle,
-	welcomeMessage
+	welcomeMessage,
+	likeTitle,
+	likeMessage
 };
