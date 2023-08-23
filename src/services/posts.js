@@ -10,7 +10,7 @@ class PostsApi{
     
 	async createPost(/* postFile,  */userId, text/* , file */){
 		//await uploadFile(postFile, `user${userId}`);
-		return await this.postsDAO.createPost({user_id: userId, text, file});
+		return await this.postsDAO.createPost({user_id: userId, text});
 	}    
 
 	async getHomePosts(userId){
