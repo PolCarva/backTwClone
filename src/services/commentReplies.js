@@ -6,11 +6,15 @@ class CommentRepliesApi{
 	}
     
 	async createCommentReply(userId, reply, commentId){
-		return await this.postCommentsDAO.createPostComment({user_id: userId, reply, comment_id: commentId});
+		return await this.commentRepliesDAO.createCommentReply({user_id: userId, reply, comment_id: commentId});
 	}    
 
 	async getCommentReplies(commentId){
-		return await this.postCommentsDAO.getPostComments(commentId);
+		return await this.commentRepliesDAO.getCommentReplies(commentId);
+	}
+
+	async getCommentReply(commentReplyId){
+		return await this.commentRepliesDAO.getCommentReply(commentReplyId);
 	}
 
 	/* 	async deletePostComment(postId){

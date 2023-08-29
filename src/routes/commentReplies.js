@@ -9,7 +9,7 @@ class CommentRepliesRouter{
 
 	start(){
 		commentRepliesRouter.post('/:postid/:commentid/respondercomentario', authMiddleware, this.controller.createCommentReply);
-		commentRepliesRouter.get('/:postid/comentarios/:commentid', authMiddleware, this.controller.getPostComments);
+		commentRepliesRouter.get('/:postid/comentarios/:commentid', authMiddleware, this.controller.getCommentReplies);
 
 		return commentRepliesRouter;
 	}

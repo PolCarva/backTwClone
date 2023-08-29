@@ -16,14 +16,14 @@ class CommentRepliesController{
 			const {commentid} = req.params;
 			await this.commentRepliesApi.createCommentReply(req.user.id, req.body.reply, commentid);
 			const comment = await this.postCommentsApi.getPostComment(commentid);
-			await this.notificationsApi.createNotification(newCommentReplyMessage(), newCommentReplyTitle(req.user.username), comment.user_id);
+			await this.notificationsApi.createNotification(newCommentReplyMessage(), newCommentReplyTitle(req.user.username), comment.user_id, 'comments');
 			res.json({success: true, message: 'respuesta al comentario creada'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
 		}
 	});  
 
-	getPostComments = asyncHandler(async(req, res) => {
+	getCommentReplies = asyncHandler(async(req, res) => {
 		try {
 			const commentsReplies = await this.commentRepliesApi.getCommentReplies(req.params.commentid);
 			res.json({success: true, data: commentsReplies}).status(200);

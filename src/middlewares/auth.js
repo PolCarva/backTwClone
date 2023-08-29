@@ -12,8 +12,8 @@ const authMiddleware = async(req, res, next) => {
 			const decoded = jwt.verify(token, 'adsfdcsfeds3w423ewdas');
 			req.user = await usersDAO.getUserById(decoded.id);
 			next();
-		} catch (error) {
-			res.status(401).json({ error: 'Token inválido' });
+		} catch (err) {
+			res.status(401).json({ error: 'Token inválido', e: err.message });
 		}
 	} else {
 		res.status(401).json({ error: 'Se requiere autenticación' });

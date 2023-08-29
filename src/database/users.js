@@ -13,7 +13,11 @@ class UsersDAO{
 
 	async getUserByUsername(username){
 		try{
-			return User.findOne({ where: { username } });
+			return User.findOne({ 
+				where: { 
+					username 
+				} 
+			});
 		}catch(err){
 			logger.info(err);
 		}
@@ -29,7 +33,24 @@ class UsersDAO{
 
 	async getUserById(id){
 		try{
-			return User.findOne({ where: { id } });
+			return User.findOne({ 
+				where: { 
+					id 
+				}
+			});
+		}catch(err){
+			logger.info(err);
+		}
+	}
+
+	async getUsersById(id){
+		try{
+			return User.findAll({ 
+				where: { 
+					id 
+				}
+			}
+			);
 		}catch(err){
 			logger.info(err);
 		}
@@ -66,6 +87,19 @@ class UsersDAO{
 					id: userId
 				}
 			});
+		}catch(err){
+			logger.info(err);
+		}
+	}
+
+	async updateUserStatus(userId, onlineValue){
+		try{
+			return await User.update(
+				{online: onlineValue}, {
+					where: {
+						id: userId
+					}
+				});
 		}catch(err){
 			logger.info(err);
 		}

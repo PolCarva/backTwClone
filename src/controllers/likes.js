@@ -8,7 +8,7 @@ class LikesController{
 
 	likePost = asyncHandler(async(req, res) => {
 		try {
-			await this.likesApi.likePost(req.user.id, req.params.postid);
+			await this.likesApi.likePost(req.user.username, req.user.id, req.params.postid);
 			res.json({success: true, message: 'post likeado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
@@ -17,7 +17,7 @@ class LikesController{
 
 	likePostComment = asyncHandler(async(req, res) => {
 		try {
-			await this.likesApi.likePostComment(req.user.id, req.params.commentid);
+			await this.likesApi.likePostComment(req.user.username, req.user.id, req.params.commentid);
 			res.json({success: true, message: 'comentario likeado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
@@ -26,7 +26,7 @@ class LikesController{
 
 	likeCommentReply = asyncHandler(async(req, res) => {
 		try {
-			await this.likesApi.likeCommentReply(req.user.id, req.params.commentreplyid);
+			await this.likesApi.likeCommentReply(req.user.username, req.user.id, req.params.commentreplyid);
 			res.json({success: true, message: 'respuesta a comentario likeada'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);

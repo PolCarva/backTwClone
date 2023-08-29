@@ -8,6 +8,7 @@ require('./src/models/user_followingList');
 require('./src/models/post_savedPostsList');
 require('./src/models/post');
 require('./src/models/user');
+require('./src/models/chat_user');
 
 
 async function server (){
@@ -27,19 +28,19 @@ async function server (){
 		});
 	}else{ */
 
-		await sequelize.sync({alter: true}).then(() => {
-			logger.info('All models were synchronized successfully.');
-		}).catch((err) => {
-			logger.info(err);
-		});
+	await sequelize.sync({alter: true}).then(() => {
+		logger.info('All models were synchronized successfully.');
+	}).catch((err) => {
+		logger.info(err);
+	});
 
-		const PORT = process.env.PORT || 3000;
+	const PORT = process.env.PORT || 3000;
 
-		const server = httpServer.listen(PORT, '0.0.0.0' ,() => {
-			logger.info(`App listening on port ${PORT}`);
-		});
+	const server = httpServer.listen(PORT, '0.0.0.0' ,() => {
+		logger.info(`App listening on port ${PORT}`);
+	});
 
-		server.on('error', err => logger.info(err));
+	server.on('error', err => logger.info(err));
 	/* } */
 }
 

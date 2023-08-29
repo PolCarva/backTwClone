@@ -10,6 +10,8 @@ const CommentReply = require('./commentReply');
 const Token = require('./token');
 const Notification = require('./notification');
 const SavedPostsList = require('./savedPostsList');
+const Chat = require('./chat');
+const Message = require('./message');
 
 const User = sequelize.define('User',{
 	id: {
@@ -34,6 +36,10 @@ const User = sequelize.define('User',{
 		allowNull: false
 	},
 	activated:{
+		type: DataTypes.BOOLEAN,
+		defaultValue: false
+	},
+	online:{
 		type: DataTypes.BOOLEAN,
 		defaultValue: false
 	},
@@ -90,5 +96,11 @@ CommentReply.belongsTo(PostComment, { foreignKey: 'comment_id', sourceKey: 'id' 
 
 User.hasOne(Token, {foreignKey: 'user_id', sourceKey: 'id'});
 Token.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
+
+Chat.hasMany(Message, {foreignKey: 'chat_id', sourceKey: 'id'});
+Message.belongsTo(Chat, {foreignKey: 'chat_id', sourceKey: 'id'});
+
+User.hasMany(Message, {foreignKey: 'user_id', sourceKey: 'id'});
+Message.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
 
 module.exports = User;

@@ -16,7 +16,7 @@ class PostCommentsController{
 			const {postid} = req.params;
 			await this.postCommentsApi.createPostComment(req.user.id, req.body.comment, postid);
 			const post = await this.postsApi.getPost(postid);
-			await this.notificationsApi.createNotification(newCommentTitle(), newCommentMessage(req.user.username), post.user_id);
+			await this.notificationsApi.createNotification(newCommentTitle(), newCommentMessage(req.user.username), post.user_id, 'comments');
 			res.json({success: true, message: 'comentario creado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);

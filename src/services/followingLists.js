@@ -1,12 +1,12 @@
-const FollowingListsDAO = require('../database/followingLists');
+const User_FollowingListsDAO = require('../database/users_followingLists');
 
 class FollowingListsApi{
 	constructor(){
-		this.followingListsDAO = new FollowingListsDAO();
+		this.users_followingListsDAO = new User_FollowingListsDAO();
 	}
     
 	async getFollowingList(userId){
-		return await this.followingListsDAO.getFollowingList(userId);
+		return await this.users_followingListsDAO.getUserFollowingList(userId);
 	}
 
 	async addUserToFollowingList(myUserId, targetUserId){

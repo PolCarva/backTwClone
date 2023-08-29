@@ -3,19 +3,20 @@ const logger = require('../utils/logger');
 
 class NotificationsDAO{
 
-	async createNotification(title, message, userId){
+	async createNotification(title, message, userId, notificationType){
 		try{
-			return await Notification.create({title, message, user_id: userId});
+			return await Notification.create({title, message, user_id: userId, notification_type: notificationType});
 		}catch(err){
 			logger.info(err);
 		}
 	}
 
-	async getAllUserNotifications(userId){
+	async getUserNotifications(userId, notificationType){
 		try{
 			return await Notification.findAll({
 				where:{
-					user_id: userId
+					user_id: userId,
+					notification_type: notificationType
 				}
 			});
 		}catch(err){

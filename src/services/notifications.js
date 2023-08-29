@@ -5,13 +5,13 @@ class NotificationsApi{
 		this.notificationsDAO = new NotificationsDAO();
 	}
     
-	async createNotification(title, message, userId){
-		return await this.notificationsDAO.createNotification(title, message, userId);
+	async createNotification(title, message, userId, notificationType){
+		return await this.notificationsDAO.createNotification(title, message, userId, notificationType);
 	}
 
-	async getAllUserNotifications(userId){
+	async getUserNotifications(userId, notificationType){
 		await this.notificationsDAO.markNotificationAsReaded();
-		return await this.notificationsDAO.getAllUserNotifications(userId);
+		return await this.notificationsDAO.getUserNotifications(userId, notificationType);
 	}   
 
 	async mentions(){

@@ -8,7 +8,7 @@ class NotificationsRouter{
 	}
 
 	start(){
-		notificationsRouter.get('/notificaciones', authMiddleware, this.controller.getAllUserNotifications);
+		notificationsRouter.get('/notificaciones/:notificationstype', authMiddleware, this.controller.getUserNotifications);
 
 		return notificationsRouter;
 	}

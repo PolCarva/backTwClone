@@ -20,7 +20,7 @@ class PostsController{
 			const posts = await this.postsApi.getHomePosts(req.user.id);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -29,7 +29,7 @@ class PostsController{
 			await this.postsApi.deletePost(req.params.postid);
 			res.json({success: true, message: 'post eliminado'}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -38,7 +38,7 @@ class PostsController{
 			const posts = await this.postsApi.getUserPosts(req.user.id);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -47,7 +47,7 @@ class PostsController{
 			const posts = await this.postsApi.getUserPosts(req.params.usuarioid);
 			res.json({success: true, data: posts}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -56,7 +56,7 @@ class PostsController{
 			const post = await this.postsApi.getPost(req.params.postid);
 			res.json({success: true, data: post}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});  
 
