@@ -1,13 +1,9 @@
 const UsersDAO = require('../database/users');
-const FollowingListsApi = require('../services/followingLists');
-const FollowersListsApi = require('../services/followersLists');
 const {uploadFile, readFile} = require('../utils/awsS3');
 
 class UsersApi{
 	constructor(){
 		this.usersDAO = new UsersDAO();
-		this.followingListsApi = new FollowingListsApi();
-		this.followersListsApi = new FollowersListsApi();
 	}
     
 	async getAllUsers(){
@@ -15,10 +11,7 @@ class UsersApi{
 	}
 
 	async getUserById(id){
-		const user = await this.usersDAO.getUserById(id);
-		const followingList = await this.followingListsApi.getFollowingList(id);
-		const followersList = await this.followersListsApi.getFollowersList(id);
-		return {user, followingList, followersList};
+		return await this.usersDAO.getUserById(id);
 	}
 
 	async getUsersById(id){

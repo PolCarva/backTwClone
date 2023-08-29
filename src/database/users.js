@@ -1,5 +1,11 @@
+const Like = require('../models/like');
+const Post = require('../models/post');
+const PostComment = require('../models/postComment');
 const User = require('../models/user');
 const logger = require('../utils/logger');
+const FollowersList = require('../models/followersList');
+const FollowingList = require('../models/followingList');
+const User_FollowingList = require('../models/user_followingList');
 
 class UsersDAO{
 
@@ -25,7 +31,10 @@ class UsersDAO{
 
 	async getUserByMail(email){
 		try{
-			return User.findOne({ where: { email } });
+			return User.findOne({ 
+				where: 
+				{ email } 
+			});
 		}catch(err){
 			logger.info(err);
 		}
@@ -36,7 +45,51 @@ class UsersDAO{
 			return User.findOne({ 
 				where: { 
 					id 
-				}
+				}, include:[
+					{
+						model: Post,
+						attributes: ['text', 'file', 'created_at'],
+						include: [
+							{
+								model: User,
+								attributes: ['full_name', 'username', 'profile_photo'] 
+							},{
+								model: Like,
+								attributes: ['id'] 
+							}, {
+								model: PostComment,
+								attributes: ['comment'],
+								include:[
+									{
+										model: User,
+										attributes: ['full_name', 'username', 'profile_photo']
+									}, {
+										model: Like,
+										attributes: ['id']
+									}
+								]
+							}
+						]
+					},{
+						model: FollowersList,
+						include: [
+							{
+								model: User,
+								as: 'Followers',
+								attributes: ['full_name', 'username', 'profile_photo']
+							}
+						]
+					}, {
+						model: FollowingList,
+						include: [
+							{
+								model: User,
+								as: 'Following',
+								attributes: ['full_name', 'username', 'profile_photo'],
+							}
+						]
+					}
+				]
 			});
 		}catch(err){
 			logger.info(err);
