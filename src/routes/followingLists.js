@@ -8,7 +8,6 @@ class FollowingListsRouter{
 	}
 
 	start(){
-		followingListsRouter.get('/listadeseguidos/:userid', authMiddleware, this.controller.getFollowingList);
 		followingListsRouter.post('/seguir/:userid', authMiddleware, this.controller.addUserToFollowingList);
 
 		return followingListsRouter;

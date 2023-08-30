@@ -29,7 +29,7 @@ class FollowersListDAO{
 					user_id: userId
 				}
 			});
-			return await userFollowersList.addUser(followerId);
+			return await userFollowersList.addFollower(followerId);
 		} catch (err) {
 			logger.info(err);
 		}

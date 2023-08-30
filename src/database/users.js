@@ -48,21 +48,21 @@ class UsersDAO{
 				}, include:[
 					{
 						model: Post,
-						attributes: ['text', 'file', 'created_at'],
+						attributes: ['id', 'text', 'file', 'created_at'],
 						include: [
 							{
 								model: User,
-								attributes: ['full_name', 'username', 'profile_photo'] 
+								attributes: ['id', 'full_name', 'username', 'profile_photo'] 
 							},{
 								model: Like,
 								attributes: ['id'] 
 							}, {
 								model: PostComment,
-								attributes: ['comment'],
+								attributes: ['id', 'comment'],
 								include:[
 									{
 										model: User,
-										attributes: ['full_name', 'username', 'profile_photo']
+										attributes: ['id', 'full_name', 'username', 'profile_photo']
 									}, {
 										model: Like,
 										attributes: ['id']
@@ -76,7 +76,7 @@ class UsersDAO{
 							{
 								model: User,
 								as: 'Followers',
-								attributes: ['full_name', 'username', 'profile_photo']
+								attributes: ['id', 'full_name', 'username', 'profile_photo']
 							}
 						]
 					}, {
@@ -85,7 +85,7 @@ class UsersDAO{
 							{
 								model: User,
 								as: 'Following',
-								attributes: ['full_name', 'username', 'profile_photo'],
+								attributes: ['id', 'full_name', 'username', 'profile_photo'],
 							}
 						]
 					}

@@ -1,8 +1,10 @@
 const User_FollowingListsDAO = require('../database/users_followingLists');
+const FollowingListsDAO = require('../database/followingLists');
 
 class FollowingListsApi{
 	constructor(){
 		this.users_followingListsDAO = new User_FollowingListsDAO();
+		this.followingListsDAO = new FollowingListsDAO();
 	}
     
 	async getFollowingList(userId){

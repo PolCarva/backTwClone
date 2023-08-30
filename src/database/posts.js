@@ -25,17 +25,17 @@ class PostsDAO{
 				},include: [
 					{
 						model: User,
-						attributes: ['full_name', 'username', 'profile_photo'] 
+						attributes: ['id', 'full_name', 'username', 'profile_photo'] 
 					},{
 						model: Like,
 						attributes: ['id'] 
 					}, {
 						model: PostComment,
-						attributes: ['comment'],
+						attributes: ['id', 'comment'],
 						include:[
 							{
 								model: User,
-								attributes: ['full_name', 'username', 'profile_photo']
+								attributes: ['id', 'full_name', 'username', 'profile_photo']
 							}, {
 								model: Like,
 								attributes: ['id']
@@ -72,17 +72,17 @@ class PostsDAO{
 				},include: [
 					{
 						model: User,
-						attributes: ['full_name', 'username', 'profile_photo'] 
+						attributes: ['id', 'full_name', 'username', 'profile_photo'] 
 					},{
 						model: Like,
 						attributes: ['id'] 
 					}, {
 						model: PostComment,
-						attributes: ['comment'],
+						attributes: ['id', 'comment'],
 						include:[
 							{
 								model: User,
-								attributes: ['full_name', 'username', 'profile_photo']
+								attributes: ['id', 'full_name', 'username', 'profile_photo']
 							}, {
 								model: Like,
 								attributes: ['id']
@@ -105,22 +105,22 @@ class PostsDAO{
 				include: [
 					{
 						model: User,
-						attributes: ['full_name', 'username', 'profile_photo'] 
+						attributes: ['id', 'full_name', 'username', 'profile_photo'] 
 					},{
 						model: Like,
 						include: [
 							{
 								model: User,
-								attributes: ['full_name', 'username','profile_photo']
+								attributes: ['id', 'full_name', 'username','profile_photo']
 							}
 						] 
 					}, {
 						model: PostComment,
-						attributes: ['comment'],
+						attributes: ['id', 'comment'],
 						include:[
 							{
 								model: User,
-								attributes: ['full_name', 'username', 'profile_photo']
+								attributes: ['id', 'full_name', 'username', 'profile_photo']
 							}, {
 								model: Like,
 								attributes: ['id']
