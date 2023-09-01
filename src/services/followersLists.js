@@ -11,8 +11,9 @@ class FollowersListsApi{
 		return await this.userFollowersListsDAO.getUserFollowersList(userId);
 	}
 
-	async addUserToFollowersList(userId, followerId){
-		return await this.followersListsDAO.addUserToFollowersList(userId, followerId);
+	async addUserToOrRemoveUserFromFollowersList(userId, followerId){
+		//LO PUSE AL REVEZ PARA QUE FUNCIONE BIEN
+		return await this.followersListsDAO.addUserToOrRemoveUserFromFollowersList(followerId, userId);
 	}
 
 

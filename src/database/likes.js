@@ -3,13 +3,13 @@ const logger = require('../utils/logger');
 
 class LikesDAO{
 
-	async createLike(like){
+	async like(like){
 		try{
 			return await Like.create(like);
 		}catch(err){
 			logger.info(err);
 		}
-	}
+	} 
 
 	async removeLike(userId, likeId){
 		try{

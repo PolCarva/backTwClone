@@ -16,7 +16,7 @@ class RetweetsController{
 			const {postid} = req.params;
 			await this.retweetsApi.retweet(postid, req.user.id);
 			const post = await this.postsApi.getPost(postid);
-			await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(req.user.username), post.user_id);
+			await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(req.user.username), post.user_id, 'others');
 			res.json({success: true, message: 'post retuiteado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
@@ -26,24 +26,6 @@ class RetweetsController{
 	getHomeRetweets = asyncHandler(async(req, res) => {
 		try {
 			const retweets = await this.retweetsApi.getHomeRetweets(req.user.id);
-			res.json({success: true, data: retweets}).status(200);
-		} catch (err) {
-			res.json({success: false, message: err}).status(500);
-		}
-	});
-
-	getMyRetweets = asyncHandler(async(req, res) => {
-		try {
-			const retweets = await this.retweetsApi.getUserRetweets(req.user.id);
-			res.json({success: true, data: retweets}).status(200);
-		} catch (err) {
-			res.json({success: false, message: err}).status(500);
-		}
-	});
-
-	getUserRetweets = asyncHandler(async(req, res) => {
-		try {
-			const retweets = await this.retweetsApi.getUserRetweets(req.params.userid);
 			res.json({success: true, data: retweets}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);

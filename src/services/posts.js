@@ -24,10 +24,6 @@ class PostsApi{
 		return await this.postsDAO.deletePost(postId);
 	}
 
-	async getUserPosts(userId){
-		return await this.postsDAO.getUserPosts(userId);
-	}
-
 	async getPost(postId){
 		return await this.postsDAO.getPost(postId);
 	}

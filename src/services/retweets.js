@@ -18,9 +18,6 @@ class RetweetsApi{
 		return await this.retweetsDAO.getHomeRetweets(followingListUsersIds);
 	}
 
-	async getUserRetweets(userId){
-		return await this.retweetsDAO.getUserRetweets(userId);
-	}
 
 	async getRetweet(retweetId){
 		return await this.retweetsDAO.getRetweet(retweetId);

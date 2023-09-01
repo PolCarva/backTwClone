@@ -20,12 +20,12 @@ class FollowingListsController{
 		}
 	});
 
-	addUserToFollowingList = asyncHandler(async(req, res) => {
+	followOrUnfollow = asyncHandler(async(req, res) => {
 		try {
-			await this.followingListsApi.addUserToFollowingList(req.params.userid, req.user.id);
-			await this.followersListsApi.addUserToFollowersList(req.user.id, req.params.userid);
-			await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(req.user.username), req.params.userid, 'others');
-			res.json({success: true, message: `usuario ${req.params.userid} agregado a la lista de seguidos de ${req.user.id}`}).status(200);
+			await this.followingListsApi.addUserToOrRemoveUserFromFollowingList(req.user.id, req.params.userid);
+			await this.followersListsApi.addUserToOrRemoveUserFromFollowersList(req.params.userid, req.user.id);
+			//await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(req.user.username), req.params.userid, 'others');
+			res.json({success: true, message: `usuario ${req.params.userid} comenzo/dejo de seguir a usuario ${req.user.id}`}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
 		}

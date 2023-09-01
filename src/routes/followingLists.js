@@ -8,7 +8,7 @@ class FollowingListsRouter{
 	}
 
 	start(){
-		followingListsRouter.post('/seguir/:userid', authMiddleware, this.controller.addUserToFollowingList);
+		followingListsRouter.post('/seguirodejardeseguir/:userid', authMiddleware, this.controller.followOrUnfollow);
 
 		return followingListsRouter;
 	}

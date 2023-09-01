@@ -18,7 +18,7 @@ class LikesApi{
 		const post = await this.postsApi.getPost(postId);
 		const user = post.dataValues.user_id;
 		this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'post'), user, 'like');
-		return await this.likesDAO.createLike({user_id: userId, post_id: postId});
+		return await this.likesDAO.like({user_id: userId, post_id: postId});
 	}
 
 	async likePostComment(userUsername, userId, commentId){

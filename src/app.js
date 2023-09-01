@@ -60,7 +60,7 @@ const usersApi = new UsersApi();
 const MessagesApi = require('./services/messages');
 const messagesApi = new MessagesApi;
 
-/* io.use(async(socket, next) => {
+io.use(async(socket, next) => {
 	const authorizationHeader = socket.handshake.auth.token;
 
 	if (authorizationHeader && authorizationHeader.startsWith('Bearer ')) {
@@ -110,7 +110,7 @@ const messagesApi = new MessagesApi;
 		await usersApi.updateUserStatus(socket.user.dataValues.id, false);
 		logger.info(`${socket.user.dataValues.username} disconnected`);
 	});
-});  */
+});  
 
 //ROUTES
 

@@ -1,4 +1,5 @@
 const FollowersList = require('../models/followersList');
+const User_FollowersList = require('../models/user_followersList');
 const UserFollowersList = require('../models/user_followersList');
 const logger = require('../utils/logger');
 
@@ -22,14 +23,26 @@ class FollowersListDAO{
 		}
 	}
 
-	async addUserToFollowersList(userId, followerId){
+	async addUserToOrRemoveUserFromFollowersList(userId, followerId){
 		try {
 			const userFollowersList = await FollowersList.findOne({
 				where:{
 					user_id: userId
 				}
 			});
-			return await userFollowersList.addFollower(followerId);
+
+			const isFollowerInFollowersList = await UserFollowersList.findOne({
+				where: {
+					follower_list_id: userFollowersList.dataValues.id,
+					user_id: followerId
+				}
+			});
+
+			if(isFollowerInFollowersList !== null){
+				return await isFollowerInFollowersList.destroy();
+			}else{
+				return await userFollowersList.addFollower(followerId);
+			}  
 		} catch (err) {
 			logger.info(err);
 		}

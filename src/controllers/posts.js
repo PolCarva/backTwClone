@@ -33,24 +33,6 @@ class PostsController{
 		}
 	});
 
-	getMyPosts = asyncHandler(async(req, res) => {
-		try {
-			const posts = await this.postsApi.getUserPosts(req.user.id);
-			res.json({success: true, data: posts}).status(200);
-		} catch (err) {
-			res.json({success: false, message: err.message}).status(500);
-		}
-	});
-
-	getUserPosts = asyncHandler(async(req, res) => {
-		try {
-			const posts = await this.postsApi.getUserPosts(req.params.usuarioid);
-			res.json({success: true, data: posts}).status(200);
-		} catch (err) {
-			res.json({success: false, message: err.message}).status(500);
-		}
-	});
-
 	getPost = asyncHandler(async(req, res) => {
 		try {
 			const post = await this.postsApi.getPost(req.params.postid);
