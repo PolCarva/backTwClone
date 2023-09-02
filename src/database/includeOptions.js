@@ -20,7 +20,7 @@ class IncludeOptions{
 	getPostIncludeOptions(){
 		return [
 			this.getUserIncludeOption(),
-			{ model: Like, attributes: ['id'] },
+			{ model: Like, attributes: ['id', 'user_id'] },
 			this.getPostCommentIncludeOption(),
 		];
 	}
@@ -31,7 +31,7 @@ class IncludeOptions{
 			attributes: ['id', 'text', 'file', 'created_at'],
 			include: [
 				this.getUserIncludeOption(),
-				{ model: Like, attributes: ['id'] },
+				{ model: Like, attributes: ['id', 'user_id'] },
 				this.getPostCommentIncludeOption(),
 			],
 		};
@@ -41,7 +41,7 @@ class IncludeOptions{
 		return {
 			model: PostComment,
 			attributes: ['id', 'comment'],
-			include: [this.getUserIncludeOption(), { model: Like, attributes: ['id'] }],
+			include: [this.getUserIncludeOption(), { model: Like, attributes: ['id', 'user_id'] }],
 		};
 	}
       
@@ -68,7 +68,7 @@ class IncludeOptions{
 			attributes: ['id', 'text', 'file'],
 			include: [
 				this.getUserIncludeOption(),
-				{ model: Like, attributes: ['id'] },
+				{ model: Like, attributes: ['id', 'user_id'] },
 				this.getPostCommentIncludeOption(),
 			],
 		};

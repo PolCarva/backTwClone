@@ -38,10 +38,11 @@ class FollowersListDAO{
 				}
 			});
 
+			console.log(isFollowerInFollowersList);
 			if(isFollowerInFollowersList !== null){
 				return await isFollowerInFollowersList.destroy();
 			}else{
-				return await userFollowersList.addFollower(followerId);
+				return await UserFollowersList.create({user_id: followerId, follower_list_id: userId});
 			}  
 		} catch (err) {
 			logger.info(err);

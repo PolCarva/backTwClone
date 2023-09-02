@@ -14,8 +14,7 @@ class FollowingListsApi{
 	}
 
 	async addUserToOrRemoveUserFromFollowingList(myUserId, targetUserId){
-		//LO PUSE AL REVEZ PARA QUE FUNCIONE BIEN
-		return await this.followingListsDAO.addUserToOrRemoveUserFromFollowingList(targetUserId, myUserId);
+		return await this.followingListsDAO.addUserToOrRemoveUserFromFollowingList(myUserId, targetUserId);
 	}
 
 

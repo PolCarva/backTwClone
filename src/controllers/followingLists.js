@@ -25,7 +25,7 @@ class FollowingListsController{
 			await this.followingListsApi.addUserToOrRemoveUserFromFollowingList(req.user.id, req.params.userid);
 			await this.followersListsApi.addUserToOrRemoveUserFromFollowersList(req.params.userid, req.user.id);
 			//await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(req.user.username), req.params.userid, 'others');
-			res.json({success: true, message: `usuario ${req.params.userid} comenzo/dejo de seguir a usuario ${req.user.id}`}).status(200);
+			res.json({success: true, message: `usuario ${req.user.id} comenzo/dejo de seguir a usuario ${req.params.userid}`}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
 		}
