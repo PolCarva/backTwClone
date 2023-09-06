@@ -14,12 +14,12 @@ class PostCommentsController{
 	createPostComment = asyncHandler(async(req, res) => {
 		try {
 			const {postid} = req.params;
-			await this.postCommentsApi.createPostComment(req.user.id, req.body.comment, postid);
+			await this.postCommentsApi.createPostComment(req.user.id, req.user.username, req.body.comment, postid);
 			const post = await this.postsApi.getPost(postid);
 			await this.notificationsApi.createNotification(newCommentTitle(), newCommentMessage(req.user.username), post.user_id, 'comments');
 			res.json({success: true, message: 'comentario creado'}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});  
 

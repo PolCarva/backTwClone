@@ -11,6 +11,20 @@ class NotificationsDAO{
 		}
 	}
 
+	async getUserNotificationByMessage(userId, message){
+		try {
+			return await Notification.findOne({
+				where: {
+					user_id: userId,
+					message
+				}
+			});
+		} catch (err) {
+			logger.info(err);
+			throw new Error(err);
+		}
+	}
+
 	async getUserNotifications(userId, notificationType){
 		try{
 			return await Notification.findAll({

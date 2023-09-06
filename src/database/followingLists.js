@@ -36,8 +36,7 @@ class FollowingListDAO{
 					following_lists_id: userFollowingList.dataValues.id,
 					users_ids: targetUserId
 				}
-			}); 
-			console.log(isTargetUserInFollowingList);
+			});
 
 			if(isTargetUserInFollowingList !== null){
 				return await isTargetUserInFollowingList.destroy();

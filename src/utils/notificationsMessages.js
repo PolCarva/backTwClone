@@ -1,3 +1,11 @@
+const mentionTitle = () => {
+	return 'Has recibido una mencion';
+};
+
+const mentionMessage = (user, mencion) => {
+	return `${user} te ha mencionado en su ${mencion}`;
+};
+
 const newFollowerTitle = () => {
 	return 'Nuevo seguidor!';
 };
@@ -47,6 +55,8 @@ const likeMessage = (usuario, likeado) => {
 };
 
 module.exports = {
+	mentionTitle,
+	mentionMessage,
 	newFollowerTitle,
 	newFollowerMessage,
 	newCommentTitle,

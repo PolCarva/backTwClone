@@ -8,10 +8,10 @@ class PostsController{
 
 	createPost = asyncHandler(async(req, res) => {
 		try {
-			await this.postsApi.createPost(req.user.id, req.body.text/* , `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/post-user${req.user.id}` */);
+			await this.postsApi.createPost(req.user.id, req.body.text, req.user.username/* , `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/post-user${req.user.id}` */);
 			res.json({success: true, message: 'post creado'}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});  
 
@@ -35,7 +35,7 @@ class PostsController{
 
 	getPost = asyncHandler(async(req, res) => {
 		try {
-			const post = await this.postsApi.getPost(req.params.postid);
+			const post = await this.postsApi.getPost(req.params.postid, req.user.id);
 			res.json({success: true, data: post}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);

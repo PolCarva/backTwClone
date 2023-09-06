@@ -19,7 +19,7 @@ class RetweetsController{
 			await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(req.user.username), post.user_id, 'others');
 			res.json({success: true, message: 'post retuiteado'}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -28,7 +28,7 @@ class RetweetsController{
 			const retweets = await this.retweetsApi.getHomeRetweets(req.user.id);
 			res.json({success: true, data: retweets}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
@@ -37,7 +37,16 @@ class RetweetsController{
 			const retweet = await this.retweetsApi.getRetweet(req.params.retweetid);
 			res.json({success: true, data: retweet}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
+		}
+	});  
+
+	deleteRetweet = asyncHandler(async(req, res) => {
+		try {
+			const retweet = await this.retweetsApi.deleteRetweet(req.params.retweetid, req.user.id);
+			res.json({success: true, data: retweet}).status(200);
+		} catch (err) {
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});  
 

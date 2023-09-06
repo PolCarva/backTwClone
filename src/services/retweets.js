@@ -21,9 +21,11 @@ class RetweetsApi{
 
 	async getRetweet(retweetId){
 		return await this.retweetsDAO.getRetweet(retweetId);
-	}    
+	}
 
-
+	async deleteRetweet(retweetId, userId){
+		return await this.retweetsDAO.deleteRetweet(retweetId, userId);
+	}
 }
 
 module.exports = RetweetsApi;

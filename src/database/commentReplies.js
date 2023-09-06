@@ -26,17 +26,18 @@ class CommentRepliesDAO{
 		}
 	}
 
-	/* 	async deletePostComment(postId){
+	async deleteCommentReply(commentReplyId, userId){
 		try{
-			return await Post.destroy({
+			return await CommentReply.destroy({
 				where:{
-					id: postId
+					id: commentReplyId,
+					user_id: userId
 				}
 			});
 		}catch(err){
 			logger.info(err);
 		}
-	} */
+	} 
 
 	async getCommentReply(commentReplyId){
 		try{

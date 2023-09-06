@@ -43,6 +43,19 @@ class RetweetsDAO{
 		}
 	}
 
+	async deleteRetweet(retweetId, userId){
+		try{
+			return await Retweet.destroy({
+				where: {
+					id: retweetId,
+					user_id: userId
+				}
+			});
+		}catch(err){
+			logger.info(err);
+		}
+	}
+
 }
 
 module.exports = RetweetsDAO;

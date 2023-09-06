@@ -33,17 +33,18 @@ class PostsDAO{
 		}
 	}
 
-	/* 	async deletePost(postId){
+	async deletePost(postId, userId){
 		try{
 			return await Post.destroy({
 				where:{
-					id: postId
+					id: postId,
+					user_id: userId
 				}
 			});
 		}catch(err){
 			logger.info(err);
 		}
-	} */
+	} 
 
 	async getPost(postId){
 		try{

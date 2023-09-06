@@ -63,7 +63,7 @@ passport.use('login', new localStrategy({
 		return done('por favor complete todos los campos');
 	}
 
-	const user = await usersDAO.getUserByUsername(username);
+	const user = await usersDAO.getUserByUsername(`@${username}`);
 
 	if(!user){
 		return done('usuario o contrasenia incorrectos');

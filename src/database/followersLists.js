@@ -37,8 +37,7 @@ class FollowersListDAO{
 					user_id: followerId
 				}
 			});
-
-			console.log(isFollowerInFollowersList);
+			
 			if(isFollowerInFollowersList !== null){
 				return await isFollowerInFollowersList.destroy();
 			}else{
