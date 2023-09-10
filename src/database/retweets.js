@@ -25,7 +25,7 @@ class RetweetsDAO{
 					}
 				},include: this.includeOptions.getRetweetedPostIncludeOption(),
 				order: [
-					['created_at', 'DESC']
+					['retweeted_at', 'DESC']
 				]}
 			);
 		}catch(err){

@@ -43,7 +43,6 @@ io.use(async(socket, next) => {
 		}
 	});
 
-
 	socket.on('send message', async(msj, userId, chatId) => {
 		try {
 			await messagesApi.createMessage(msj, userId, chatId);

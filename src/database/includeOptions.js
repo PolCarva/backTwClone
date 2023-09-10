@@ -55,7 +55,7 @@ class IncludeOptions{
 	getRetweetIncludeOption() {
 		return {
 			model: Retweet,
-			attributes: ['id', 'created_at'],
+			attributes: ['id', 'retweeted_at'],
 			include: [
 				this.getRetweetedPostIncludeOption()
 			],

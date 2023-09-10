@@ -6,9 +6,14 @@ const Retweet = sequelize.define('Retweet',{
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
 		primaryKey: true
+	}, 
+	retweeted_at: {
+		type: DataTypes.DATE,
+		defaultValue: DataTypes.NOW
 	}
 }, {
-	underscored: true
+	underscored: true,
+	timestamps: false
 });
 
 
