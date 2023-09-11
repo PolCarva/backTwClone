@@ -9,6 +9,7 @@ require('./src/models/post_savedPostsList');
 require('./src/models/post');
 require('./src/models/user');
 require('./src/models/chat_user');
+require('./src/models/retweet');
 
 
 async function server (){

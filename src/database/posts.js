@@ -23,11 +23,8 @@ class PostsDAO{
 					user_id:{
 						[Op.in]: following
 					}
-				},include: this.includeOptions.getPostIncludeOptions(),
-				order: [
-					['created_at', 'DESC']
-				]}
-			);
+				},include: this.includeOptions.getHomeIncludeOptions()
+			});
 		}catch(err){
 			logger.info(err);
 		}

@@ -6,8 +6,8 @@ const Retweet = sequelize.define('Retweet',{
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
 		primaryKey: true
-	}, 
-	retweeted_at: {
+	},
+	retweeted_at:{
 		type: DataTypes.DATE,
 		defaultValue: DataTypes.NOW
 	}

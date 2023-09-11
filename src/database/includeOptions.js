@@ -17,6 +17,13 @@ class IncludeOptions{
 		];
 	}
 
+	getHomeIncludeOptions(){
+		return [
+			this.getPostIncludeOptions(),
+			this.getRetweetIncludeOption()
+		];
+	}
+
 	getPostIncludeOptions(){
 		return [
 			this.getUserIncludeOption(),
