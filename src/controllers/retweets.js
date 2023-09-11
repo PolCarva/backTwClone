@@ -22,16 +22,7 @@ class RetweetsController{
 			res.json({success: false, message: err.message}).status(500);
 		}
 	});
-
-	getHomeRetweets = asyncHandler(async(req, res) => {
-		try {
-			const retweets = await this.retweetsApi.getHomeRetweets(req.user.id);
-			res.json({success: true, data: retweets}).status(200);
-		} catch (err) {
-			res.json({success: false, message: err.message}).status(500);
-		}
-	});
-
+	
 	getRetweet = asyncHandler(async(req, res) => {
 		try {
 			const retweet = await this.retweetsApi.getRetweet(req.params.retweetid);

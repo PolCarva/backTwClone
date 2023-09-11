@@ -23,7 +23,7 @@ class PostsDAO{
 					user_id:{
 						[Op.in]: following
 					}
-				},include: this.includeOptions.getHomeIncludeOptions()
+				},include: this.includeOptions.getPostIncludeOptions()
 			});
 		}catch(err){
 			logger.info(err);

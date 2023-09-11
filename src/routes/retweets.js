@@ -9,7 +9,6 @@ class RetweetsRouter{
 
 	start(){
 		retweetsRouter.post('/retuitear/:postid', authMiddleware, this.controller.retweet);
-		retweetsRouter.get('/retweets', authMiddleware, this.controller.getHomeRetweets);
 		retweetsRouter.post('/eliminarretweet/:retweetid', authMiddleware, this.controller.deleteRetweet);
 		retweetsRouter.get('/retweet/:retweetid', authMiddleware, this.controller.getRetweet);
 

@@ -17,21 +17,15 @@ class IncludeOptions{
 		];
 	}
 
-	getHomeIncludeOptions(){
-		return [
-			this.getPostIncludeOptions(),
-			this.getRetweetIncludeOption()
-		];
-	}
-
 	getPostIncludeOptions(){
 		return [
 			this.getUserIncludeOption(),
 			{ model: Like, attributes: ['id', 'user_id'] },
 			this.getPostCommentIncludeOption(),
+			this.getRetweetIncludeOption()
 		];
 	}
-      
+	
 	getPostIncludeOption() {
 		return {
 			model: Post,
@@ -40,6 +34,7 @@ class IncludeOptions{
 				this.getUserIncludeOption(),
 				{ model: Like, attributes: ['id', 'user_id'] },
 				this.getPostCommentIncludeOption(),
+				this.getRetweetIncludeOption()
 			],
 		};
 	}
@@ -64,7 +59,8 @@ class IncludeOptions{
 			model: Retweet,
 			attributes: ['id', 'retweeted_at'],
 			include: [
-				this.getRetweetedPostIncludeOption()
+				this.getRetweetedPostIncludeOption(),
+				this.getUserIncludeOption()
 			],
 		};
 	}

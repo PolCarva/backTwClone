@@ -1,9 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const PostsApi = require('../services/posts');
+const RetweetsApi = require('../services/retweets');
 
 class PostsController{
 	constructor(){
 		this.postsApi = new PostsApi();
+		this.retweetsApi = new RetweetsApi();
 	}
 
 	createPost = asyncHandler(async(req, res) => {
@@ -17,8 +19,10 @@ class PostsController{
 
 	getHomePosts = asyncHandler(async(req, res) => {
 		try {
-			const posts = await this.postsApi.getHomePosts(req.user.id);
-			res.json({success: true, data: posts}).status(200);
+			const {id} = req.user;
+			const retweets = await this.retweetsApi.getHomeRetweets(id);
+			const posts = await this.postsApi.getHomePosts(id);
+			res.json({success: true, data: [{posts}, {retweets}]}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
 		}
