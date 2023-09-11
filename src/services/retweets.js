@@ -7,8 +7,8 @@ class RetweetsApi{
 		this.usersFollowingListsDAO = new UsersFollowingListsDAO();
 	}
     
-	async retweet(postId, userId){
-		return await this.retweetsDAO.retweet({post_id: postId, user_id: userId});
+	async retweet(userId, postId){
+		return await this.retweetsDAO.retweet(userId, postId);
 	}
 
 	async getHomeRetweets(userId){

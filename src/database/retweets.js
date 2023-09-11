@@ -8,9 +8,20 @@ class RetweetsDAO{
 		this.includeOptions = new IncludeOptions();
 	}
 
-	async retweet(retweet){
+	async retweet(userId, postId){
 		try{
-			return await Retweet.create(retweet);
+			const retweetExist = await Retweet.findOne({
+				where:{
+					user_id: userId,
+					post_id: postId
+				}
+			});
+			
+			if(retweetExist){
+				return await retweetExist.destroy();
+			}
+
+			return await Retweet.create({user_id: userId, post_id: postId});
 		}catch(err){
 			logger.info(err);
 		}
