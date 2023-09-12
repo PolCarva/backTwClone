@@ -17,7 +17,7 @@ class RetweetsController{
 			await this.retweetsApi.retweet(req.user.id, postid);
 			const post = await this.postsApi.getPost(postid);
 			//await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(req.user.username), post.user_id, 'others');
-			res.json({success: true, message: 'post retuiteado'}).status(200);
+			res.json({success: true, message: `post retuiteado por ${req.user.username}`}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
 		}

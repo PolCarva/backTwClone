@@ -59,12 +59,11 @@ class IncludeOptions{
 			model: Retweet,
 			attributes: ['id', 'retweeted_at'],
 			include: [
-				this.getRetweetedPostIncludeOption(),
-				this.getUserIncludeOption()
+				this.getRetweetedPostIncludeOption()
 			],
 		};
 	}
-      
+
 	getRetweetedPostIncludeOption() {
 		return {
 			model: Post,
@@ -73,10 +72,11 @@ class IncludeOptions{
 				this.getUserIncludeOption(),
 				{ model: Like, attributes: ['id', 'user_id'] },
 				this.getPostCommentIncludeOption(),
-			],
-		};
+			]
+		}
+		;
 	}
-      
+
 	getFollowersListIncludeOption() {
 		return {
 			model: FollowersList,

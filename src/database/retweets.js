@@ -34,7 +34,7 @@ class RetweetsDAO{
 					user_id:{
 						[Op.in]: following
 					}
-				},include: this.includeOptions.getRetweetedPostIncludeOption(),
+				},include: [this.includeOptions.getRetweetedPostIncludeOption(), this.includeOptions.getUserIncludeOption()],
 				order: [
 					['retweeted_at', 'DESC']
 				]}
