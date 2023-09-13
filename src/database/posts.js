@@ -16,13 +16,20 @@ class PostsDAO{
 		}
 	}
 
-	async getHomePosts(following){
+	async getHomePosts(following, userId){
 		try{
 			return await Post.findAll({
 				where:{
-					user_id:{
-						[Op.in]: following
-					}
+					[Op.or]: [
+						{
+							user_id:{
+								[Op.in]: following
+							}
+						}, 
+						{
+							user_id: userId 
+						}						
+					]					
 				},include: this.includeOptions.getPostIncludeOptions()
 			});
 		}catch(err){

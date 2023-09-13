@@ -26,7 +26,7 @@ class PostsApi{
 		const userFollowingList = await this.usersFollowingListsDAO.getUserFollowingList(userId);
 		const followingListUsersIds = userFollowingList.map(list => list.dataValues.users_ids);
 
-		return await this.postsDAO.getHomePosts(followingListUsersIds);
+		return await this.postsDAO.getHomePosts(followingListUsersIds, userId);
 	}
 
 	async deletePost(postId, userId){

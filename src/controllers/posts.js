@@ -36,6 +36,7 @@ class PostsController{
 			res.json({success: false, message: err.message}).status(500);
 		}
 	});
+	
 
 	getPost = asyncHandler(async(req, res) => {
 		try {
