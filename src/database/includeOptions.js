@@ -70,6 +70,7 @@ class IncludeOptions{
 			attributes: ['id', 'text', 'file'],
 			include: [
 				this.getUserIncludeOption(),
+				{model: Retweet, attributes: ['id', 'retweeted_at']},
 				{ model: Like, attributes: ['id', 'user_id'] },
 				this.getPostCommentIncludeOption(),
 			]
