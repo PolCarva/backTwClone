@@ -30,7 +30,7 @@ class PostsController{
 
 	deletePost = asyncHandler(async(req, res) => {
 		try {
-			await this.postsApi.deletePost(req.params.postid);
+			await this.postsApi.deletePost(req.params.postid, req.user.id);
 			res.json({success: true, message: 'post eliminado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
