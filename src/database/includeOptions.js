@@ -5,6 +5,7 @@ const Retweet = require('../models/retweet');
 const User = require('../models/user');
 const FollowersList = require('../models/followersList');
 const FollowingList = require('../models/followingList');
+const SavedPostsList = require('../models/savedPostsList');
 
 class IncludeOptions{
 
@@ -22,7 +23,8 @@ class IncludeOptions{
 			this.getUserIncludeOption(),
 			{ model: Like, attributes: ['id', 'user_id'] },
 			this.getPostCommentIncludeOption(),
-			this.getRetweetIncludeOption()
+			this.getRetweetIncludeOption(),
+			{model: SavedPostsList}
 		];
 	}
 	
