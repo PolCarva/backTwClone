@@ -1,9 +1,13 @@
 const SavedPostsList = require('../models/savedPostsList');
-const PostSavedPostsList = require('../models/post_savedPostsList');
 const logger = require('../utils/logger');
 const Post = require('../models/post');
+const IncludeOptions = require('./includeOptions');
+const User = require('../models/user');
 
 class SavedPostsListsDAO{
+	constructor(){
+		this.includeOptions = new IncludeOptions;
+	}
 
 	async createSavedPostsList(userId){
 		try{
@@ -15,14 +19,20 @@ class SavedPostsListsDAO{
 
 	async getSavedPostsList(userId){
 		try {
-			return await PostSavedPostsList.findAll({ 
-				where: { saved_posts_list_id: userId }/* ,
-				include: {
-					model: Post,
-					through: {
-						attributes: [] 
+			return await SavedPostsList.findAll({ 
+				where: { id: userId },
+				include: [
+					{
+						model: Post,
+						attributes: ['id', 'text', 'file', 'created_at', 'user_id'],
+						include:[
+							{
+								model: User,
+								attributes: ['full_name', 'username']
+							}
+						]
 					}
-				} */
+				]
 			});
 		} catch (err) {
 			logger.info(err);

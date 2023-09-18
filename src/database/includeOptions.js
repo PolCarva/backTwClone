@@ -27,7 +27,7 @@ class IncludeOptions{
 			{model: SavedPostsList}
 		];
 	}
-	
+
 	getPostIncludeOption() {
 		return {
 			model: Post,
@@ -78,6 +78,15 @@ class IncludeOptions{
 			]
 		}
 		;
+	}
+
+	getSavedPostsListIncludeOption(){
+		return {
+			model: SavedPostsList,
+			include:[
+				this.getPostIncludeOption()
+			]
+		};
 	}
 
 	getFollowersListIncludeOption() {
