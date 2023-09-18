@@ -11,6 +11,7 @@ class UsersRouter{
 		usersRouter.post('/actualizarperfil', authMiddleware, this.controller.updateUserData);
 		usersRouter.get('/miperfil', authMiddleware, this.controller.getMyProfile);
 		usersRouter.get('/perfilusuario/:userid', authMiddleware, this.controller.getUserProfile);
+		usersRouter.get('/usuarios', authMiddleware, this.controller.getAllUsers);
 		return usersRouter;
 	}
 }

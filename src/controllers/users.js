@@ -36,6 +36,15 @@ class UsersController{
 		}
 	});
 
+	getAllUsers = asyncHandler(async(req, res) => {
+		try {
+			const users = await this.usersApi.getAllUsers();
+			res.json({success: true, data: users}).status(200);
+		} catch (err) {
+			res.json({success: false, message: err}).status(500);
+		}
+	});
+
 }
 
 module.exports = UsersController;

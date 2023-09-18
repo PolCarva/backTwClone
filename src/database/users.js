@@ -66,7 +66,9 @@ class UsersDAO{
 
 	async getAllUsers(){
 		try{
-			return User.findAll();
+			return User.findAll({
+				include: this.includeOptions.getUserIncludeOptions()
+			});
 		}catch(err){
 			logger.info(err);
 		}
