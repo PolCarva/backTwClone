@@ -8,9 +8,7 @@ class LikesRouter{
 	}
 
 	start(){
-		likesRouter.post('/likepost/:postid', authMiddleware, this.controller.likePost);
-		likesRouter.post('/likecomment/:commentid', authMiddleware, this.controller.likePostComment);
-		likesRouter.post('/likecommentreply/:commentreplyid', authMiddleware, this.controller.likeCommentReply);
+		likesRouter.post('/like/:tipo/:id', authMiddleware, this.controller.like);
 		likesRouter.post('/removelike/:likeid', authMiddleware, this.controller.removeLike);
 		likesRouter.get('/postlikes/:postid', authMiddleware, this.controller.getPostLikes);
 		likesRouter.get('/commentlikes/:commentid', authMiddleware, this.controller.getCommentLikes);

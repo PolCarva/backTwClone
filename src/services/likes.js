@@ -14,28 +14,32 @@ class LikesApi{
 		this.commentRepliesApi = new CommentRepliesApi();
 	}
     
-	async likePost(userUsername, userId, postId){
-		const post = await this.postsApi.getPost(postId);
-		const user = post.dataValues.user_id;
-		this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'post'), user, 'like');
-		return await this.likesDAO.like({user_id: userId, post_id: postId});
+	async like(userUsername, userId, postId, commentId, commentReplyId){
+		if(postId !== null){
+			const post = await this.postsApi.getPost(postId);
+			const user = post.dataValues.user_id;
+			const like = await this.likesDAO.like('Tweet', userId, postId, null, null);
+			await this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'Tweet'), user, 'like', null, like.dataValues.id, null);
+			return like;
+		}
+
+		if(commentId !== null){
+			const postComment = await this.postCommentsApi.getPostComment(commentId);
+			const user = postComment.dataValues.user_id;
+			const like = await this.likesDAO.like('Comentario', userId, null, commentId, null);
+			await this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'Comentario'), user, 'like', null, like.dataValues.id, null);
+		}
+
+		if(commentReplyId !== null){
+			const commentReply = await this.commentRepliesApi.getCommentReply(commentReplyId);
+			const user = commentReply.dataValues.user_id;
+			const like = await this.likesDAO.like('Reply', userId, null, commentId, null);
+			await this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'Reply'), user, 'like', null, like.dataValues.id, null);
+		}
 	}
 
-	async likePostComment(userUsername, userId, commentId){
-		const postComment = await this.postCommentsApi.getPostComment(commentId);
-		const user = postComment.dataValues.user_id;
-		this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'comentario'), user, 'like');
-		return await this.likesDAO.createLike({user_id: userId, comment_id: commentId});
-	}    
-
-	async likeCommentReply(userUsername, userId, commentReplyId){
-		const commentReply = await this.commentRepliesApi.getCommentReply(commentReplyId);
-		const user = commentReply.dataValues.user_id;
-		this.notificationsApi.createNotification(likeTitle(), likeMessage(userUsername, 'respuesta'), user, 'like');
-		return await this.likesDAO.createLike({user_id: userId, comment_reply_id: commentReplyId});
-	}    
-
 	async removeLike(userId, likeId){
+		await this.notificationsApi.notificationsDAO.deleteNotification('like', likeId);
 		return await this.likesDAO.removeLike(userId, likeId);
 	} 
 

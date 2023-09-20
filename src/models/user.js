@@ -103,4 +103,13 @@ Message.belongsTo(Chat, {foreignKey: 'chat_id', sourceKey: 'id'});
 User.hasMany(Message, {foreignKey: 'user_id', sourceKey: 'id'});
 Message.belongsTo(User, {foreignKey: 'user_id', sourceKey: 'id'});
 
+Retweet.hasOne(Notification, {foreignKey: 'retweet_id', sourceKey: 'id'});
+Notification.belongsTo(Retweet, {foreignKey: 'retweet_id', sourceKey: 'id'});
+
+Like.hasOne(Notification, {foreignKey: 'like_id', sourceKey: 'id'});
+Notification.belongsTo(Like, {foreignKey: 'like_id', sourceKey: 'id'});
+
+Post.hasOne(Notification, {foreignKey: 'post_id', sourceKey: 'id'});
+Notification.belongsTo(Post, {foreignKey: 'post_id', sourceKey: 'id'});
+
 module.exports = User;

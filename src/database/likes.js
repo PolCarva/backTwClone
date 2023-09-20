@@ -1,15 +1,11 @@
 const Like = require('../models/like');
+const LikeFactory = require('./factoryDAO/likes');
 const logger = require('../utils/logger');
 
-class LikesDAO{
-
-	async like(like){
-		try{
-			return await Like.create(like);
-		}catch(err){
-			logger.info(err);
-		}
-	} 
+class LikesDAO extends LikeFactory{
+	constructor(){
+		super();
+	}
 
 	async removeLike(userId, likeId){
 		try{

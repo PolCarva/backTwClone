@@ -10,6 +10,7 @@ require('./src/models/post');
 require('./src/models/user');
 require('./src/models/chat_user');
 require('./src/models/retweet');
+require('./src/models/notification');
 
 
 async function server (){

@@ -21,7 +21,7 @@ class FollowingListsApi{
 		if(notificationExist !== null){
 			await notificationExist.destroy();
 		}else{
-			await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(userUsername), targetUserId, 'others');
+			await this.notificationsApi.createNotification(newFollowerTitle(), newFollowerMessage(userUsername), targetUserId, 'others', null, null, null);
 		}
 		return await this.followingListsDAO.addUserToOrRemoveUserFromFollowingList(myUserId, targetUserId);
 	}

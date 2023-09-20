@@ -5,8 +5,8 @@ class NotificationsApi{
 		this.notificationsDAO = new NotificationsDAO();
 	}
     
-	async createNotification(title, message, userId, notificationType){
-		return await this.notificationsDAO.createNotification(title, message, userId, notificationType);
+	async createNotification(title, message, userId, notificationType, retweetId, likeId, postId){
+		return await this.notificationsDAO.createNotification(title, message, userId, notificationType, retweetId, likeId, postId);
 	}
 
 	async getUserNotificationByMessage(userId, message){
@@ -18,7 +18,9 @@ class NotificationsApi{
 		return await this.notificationsDAO.getUserNotifications(userId, notificationType);
 	}   
 
-
+	async deleteNotification(notificationType, id){
+		return await this.notificationsDAO.deleteNotification(notificationType, id);
+	}
 }
 
 module.exports = NotificationsApi;

@@ -1,14 +1,10 @@
 const Notification = require('../models/notification');
 const logger = require('../utils/logger');
+const NotificationFactory = require('./factoryDAO/notifications');
 
-class NotificationsDAO{
-
-	async createNotification(title, message, userId, notificationType){
-		try{
-			return await Notification.create({title, message, user_id: userId, notification_type: notificationType});
-		}catch(err){
-			logger.info(err);
-		}
+class NotificationsDAO extends NotificationFactory{
+	constructor(){
+		super();
 	}
 
 	async getUserNotificationByMessage(userId, message){
@@ -40,20 +36,14 @@ class NotificationsDAO{
 
 	async markNotificationAsReaded(){
 		try {
-			return await Notification.update({ readed: true }, {
+			return await Notification.update({ 
+				readed: true 
+			}, {
 				where: {
 					readed: false,
 				},
 			});
 		} catch (err) {
-			logger.info(err);
-		}
-	}
-
-	async mentions(){
-		try{
-			
-		}catch(err){
 			logger.info(err);
 		}
 	}

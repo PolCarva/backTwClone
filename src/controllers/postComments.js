@@ -1,22 +1,16 @@
 const asyncHandler = require('express-async-handler');
 const PostCommentsApi = require('../services/postComments');
 const NotificationsApi = require('../services/notifications');
-const PostsApi = require('../services/posts');
-const { newCommentTitle, newCommentMessage } = require('../utils/notificationsMessages');
 
 class PostCommentsController{
 	constructor(){
 		this.postCommentsApi = new PostCommentsApi();
-		this.postsApi = new PostsApi();
 		this.notificationsApi = new NotificationsApi();
 	}
 
 	createPostComment = asyncHandler(async(req, res) => {
 		try {
-			const {postid} = req.params;
-			await this.postCommentsApi.createPostComment(req.user.id, req.user.username, req.body.comment, postid);
-			const post = await this.postsApi.getPost(postid);
-			await this.notificationsApi.createNotification(newCommentTitle(), newCommentMessage(req.user.username), post.user_id, 'comments');
+			await this.postCommentsApi.createPostComment(req.user.id, req.user.username, req.body.comment, req.params.postid);
 			res.json({success: true, message: 'comentario creado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);

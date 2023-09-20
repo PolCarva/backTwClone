@@ -4,14 +4,14 @@ const usersDAO = new UsersDAO();
 const NotificationsDAO = require('../database/notifications');
 const notificationsDAO = new NotificationsDAO();
 
-async function mention(text, userId, userUsername){
+async function mention(text, userId, userUsername, postId){
 	const words = text.split(' ');
 	const usersMentioned = [];
 	for (let i = 0; i < words.length; i++) {
 		if(words[i][0] === '@'){
 			const user = await usersDAO.getUserByUsername(words[i]);
 			if(user && user.dataValues.id !== userId && !usersMentioned.includes(user.dataValues.id)){
-				await notificationsDAO.createNotification(mentionTitle(), mentionMessage(userUsername, 'post'), user.dataValues.id, 'mention');
+				await notificationsDAO.createNotification(mentionTitle(), mentionMessage(userUsername, 'post'), user.dataValues.id, 'mention', null, null, postId);
 				usersMentioned.push(user.dataValues.id);
 			}
 		}

@@ -1,22 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const RetweetsApi = require('../services/retweets');
-const NotificationsApi = require('../services/notifications');
-const PostsApi = require('../services/posts');
-const { postRetweetedTitle, postRetweetedMessage } = require('../utils/notificationsMessages');
 
 class RetweetsController{
 	constructor(){
 		this.retweetsApi = new RetweetsApi();
-		this.postsApi = new PostsApi();
-		this.notificationsApi = new NotificationsApi();
 	}
 
 	retweet = asyncHandler(async(req, res) => {
 		try {
-			const {postid} = req.params;
-			await this.retweetsApi.retweet(req.user.id, postid);
-			const post = await this.postsApi.getPost(postid);
-			//await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(req.user.username), post.user_id, 'others');
+			await this.retweetsApi.retweet(req.user.id, req.params.postid, req.user.username);
 			res.json({success: true, message: `post retuiteado por ${req.user.username}`}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
