@@ -19,7 +19,7 @@ class RetweetsApi{
 
 		if(retweet.dataValues === undefined){
 			console.log(this.retweetId);
-			await this.notificationsApi.deleteNotification('retweets', this.retweetId);
+			return await this.notificationsApi.deleteNotification('retweets', this.retweetId);
 		}else{
 			this.retweetId = retweet.dataValues.id;
 			await this.notificationsApi.createNotification(postRetweetedTitle(), postRetweetedMessage(userUsername), post.user_id, 'retweets', retweet.dataValues.id, null, null);

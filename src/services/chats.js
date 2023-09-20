@@ -16,9 +16,9 @@ class ChatsApi{
 
 	async getMyChats(userId){
 		const withWhoIAmChattingId = await this.chatsUsersDAO.getWithWhoIAmChatting(userId);
-		const withWhoIAmChattingUser = await this.usersApi.getUsersById(withWhoIAmChattingId);
+		const withWhoIAmChattingUser = await this.usersApi.getUsersById(withWhoIAmChattingId[0]);
 
-		return withWhoIAmChattingUser.map(({profile_photo, username, full_name}) => ({profile_photo, username, full_name}));
+		return withWhoIAmChattingUser.map(({id, profile_photo, username, full_name}) => ({id, profile_photo, username, full_name, chat_id: withWhoIAmChattingId[1][withWhoIAmChattingUser.findIndex(user => user.id === id)]}));
 	}
 
 }

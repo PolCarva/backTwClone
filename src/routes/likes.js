@@ -12,7 +12,7 @@ class LikesRouter{
 		likesRouter.post('/removelike/:likeid', authMiddleware, this.controller.removeLike);
 		likesRouter.get('/postlikes/:postid', authMiddleware, this.controller.getPostLikes);
 		likesRouter.get('/commentlikes/:commentid', authMiddleware, this.controller.getCommentLikes);
-		likesRouter.get('/commentreplylikes/:commentreplyid', authMiddleware, this.controller.getCommentReplyLikes);
+		//likesRouter.get('/commentreplylikes/:commentreplyid', authMiddleware, this.controller.getCommentReplyLikes);
 
 		return likesRouter;
 	}

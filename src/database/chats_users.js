@@ -23,7 +23,7 @@ class ChatsUsersDAO{
 					user_id: userId
 				}
 			});
-		
+
 			const withWhoIAmChatting = await ChatUser.findAll({
 				attributes: ['user_id'],
 				where: {
@@ -36,7 +36,7 @@ class ChatsUsersDAO{
 				}
 			});
 
-			return withWhoIAmChatting.map(chat => chat.user_id);
+			return [withWhoIAmChatting.map(chat => chat.user_id), chatIds.map(chat => chat.dataValues.chat_id)];
 		} catch (err) {
 			logger.info(err);
 			throw new Error(err.message);
