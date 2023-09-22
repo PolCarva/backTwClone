@@ -1,25 +1,34 @@
 const PostsDAO = require('../database/posts');
 const UsersDAO = require('../database/users');
 const UsersFollowingListsDAO = require('../database/users_followingLists');
-const NotificationsDAO = require('../database/notifications');
-const {uploadFile, readFile} = require('../utils/awsS3');
+const NotificationsApi = require('../services/notifications');
+const PostCommentsApi = require('./postComments');
+const {uploadFile} = require('../utils/awsS3');
 const mention = require('../utils/mentions');
+const transformUserMention = require('../utils/transformUserMention');
 
 class PostsApi{
 	constructor(){
 		this.postsDAO = new PostsDAO();
 		this.usersFollowingListsDAO = new UsersFollowingListsDAO();
 		this.usersDAO = new UsersDAO();
-		this.notificationsDAO = new NotificationsDAO();
+		this.notificationsApi = new NotificationsApi();
+		this.postCommentsApi = new PostCommentsApi();
 	}
     
-	async createPost(/* postFile,  */userId, text, userUsername/* , file */){
-		//await uploadFile(postFile, `user${userId}`);
-
-		if(text){
-			await mention(text, userId, userUsername);
+	async createPost(postFile, fileName, userId, text, userUsername, fileUrl){
+		if(postFile && fileName && fileUrl){
+			await uploadFile(postFile, fileName);
 		}
-		return await this.postsDAO.createPost({user_id: userId, text});
+		
+		if(text.includes('@')){
+			let wordsWithArroba = text.match(/\B@\S+/g);
+			const transformedText = transformUserMention(wordsWithArroba, text);
+			const post = await this.postsDAO.createPost({user_id: userId, text: transformedText, file: fileUrl });
+			await mention(transformedText, userId, userUsername, post.dataValues.id);
+		}else{
+			return await this.postsDAO.createPost({user_id: userId, text, file: fileUrl });
+		}
 	}    
 
 	async getHomePosts(userId){
@@ -30,6 +39,8 @@ class PostsApi{
 	}
 
 	async deletePost(postId, userId){
+		await this.notificationsApi.deleteNotification('mention', postId);
+		await this.postCommentsApi.deleteAllCommentsfromPost(postId);
 		return await this.postsDAO.deletePost(postId, userId);
 	}
 

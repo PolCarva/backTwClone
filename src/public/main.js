@@ -1,7 +1,7 @@
 //ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
 const socket = io({
 	auth: {
-		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkzMzk4NTk2fQ.4ET6OTs2OCDjt6-AMCsdEdWN3FLm6kHfLTfTLDx-s5U'
+		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk1MjQ1NTYzfQ.Gcz8NYKy1dXi2gfVdsJdZET22gl36cJZLvXM0BbWZ2E'
 	}
 });
 

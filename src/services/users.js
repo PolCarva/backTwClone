@@ -10,6 +10,10 @@ class UsersApi{
 		return await this.usersDAO.getAllUsers();
 	}
 
+	async getUserByUsername(username){
+		return await this.usersDAO.getUserByUsername(username);
+	}
+
 	async getUserById(id){
 		return await this.usersDAO.getUserById(id);
 	}
@@ -21,9 +25,9 @@ class UsersApi{
 	async updateUserChats(userId, chatId){
 	}
 
-	async updateUserData(profilePhotoFile, userId, username, fullName, profilePhotoS3){
-		await uploadFile(profilePhotoFile, `user${userId}`);
-		return await this.usersDAO.updateUserData(userId, username, fullName, profilePhotoS3);
+	async updateUserData(profilePhotoFile, fileName, userId, username, fullName, fileUrl){
+		await uploadFile(profilePhotoFile, fileName);
+		return await this.usersDAO.updateUserData(userId, username, fullName, fileUrl);
 	}
 
 	async updateUserStatus(userId, online){

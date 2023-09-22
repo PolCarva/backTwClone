@@ -26,14 +26,14 @@ class PostCommentsController{
 		}
 	});
 
-	/* 	deletePostComment = asyncHandler(async(req, res) => {
+	deletePostComment = asyncHandler(async(req, res) => {
 		try {
-			await this.postsApi.deletePost(req.params.postid);
+			await this.postCommentsApi.deletePostComment(req.params.commentid, req.user.id);
 			res.json({success: true, message: 'post eliminado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
 		}
-	}); */
+	}); 
 
 	getPostComment = asyncHandler(async(req, res) => {
 		try {

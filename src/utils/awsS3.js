@@ -9,12 +9,12 @@ const client = new S3Client({region: process.env.AWS_BUCKET_REGION,
 	}
 });
 
-async function uploadFile(file, imageName){
-	const stream = fs.createReadStream(file.tempFilePath);
+async function uploadFile(file, fileName){
+	const stream = fs.createReadStream(file);
 
 	const uploadParams = {
 		Bucket: process.env.AWS_BUCKET_NAME,
-		Key: imageName,
+		Key: fileName,
 		Body: stream
 	};
 	const command = new PutObjectCommand(uploadParams);

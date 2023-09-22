@@ -10,7 +10,7 @@ class PostsController{
 
 	createPost = asyncHandler(async(req, res) => {
 		try {
-			await this.postsApi.createPost(req.user.id, req.body.text, req.user.username/* , `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/post-user${req.user.id}` */);
+			await this.postsApi.createPost(req.files?.file.tempFilePath, req.files?.file.name, req.user.id, req.body?.text, req.user.username, req.files?`https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${req.files?.file.name}`:null );
 			res.json({success: true, message: 'post creado'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
