@@ -133,6 +133,7 @@ io.use(async(socket, next) => {
 	socket.on('get chat id', async(chatId) => {
 		try {
 			const messages = await messagesApi.getMessagesInChat(chatId);
+			
 			socket.emit('get messages', messages);
 		} catch (err) {
 			logger.info(err);

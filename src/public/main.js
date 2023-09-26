@@ -20,7 +20,6 @@ socket.on('get messages', (messages)=> {
 });
 
 
-
 var form = document.getElementById('form');
 var input = document.getElementById('input');
 
