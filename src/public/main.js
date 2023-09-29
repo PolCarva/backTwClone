@@ -1,4 +1,4 @@
-//ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
+/* //ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
 const socket = io({
 	auth: {
 		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk1MjQ1NTYzfQ.Gcz8NYKy1dXi2gfVdsJdZET22gl36cJZLvXM0BbWZ2E'
@@ -33,4 +33,4 @@ form.addEventListener('submit', function(e) {
 
 socket.on('get new message', (messages)=> {
 	console.log(messages);
-});
+}); */

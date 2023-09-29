@@ -1,4 +1,4 @@
-/* const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 const logger = require('./logger');
 
 const sendEmail = async(from, to, subject, message) => {
@@ -19,18 +19,6 @@ const sendEmail = async(from, to, subject, message) => {
 		}
 	});
 
-	await new Promise((resolve, reject) => {
-		transporter.verify(function (error, success) {
-			if (error) {
-				logger.info(error);
-				reject(error);
-			} else {
-				logger.info('Server is ready to take our messages');
-				resolve(success);
-			}
-		});
-	});
-
 	const options = {
 		from,
 		to,
@@ -38,43 +26,13 @@ const sendEmail = async(from, to, subject, message) => {
 		html: message
 	};
 
-	await new Promise((resolve, reject) => {
-		transporter.sendMail(options, (err, info) => {
-			if (err) {
-				logger.info('hubo un error ' + err);
-				reject(err);
-			} else {
-				logger.info(info,'mail enviado');
-				resolve(info);
-			}
-		});
+	transporter.sendMail(options, (err, info) => {
+		if (err) {
+			logger.info('hubo un error ' + err);
+		} else {
+			logger.info(info,'mail enviado');
+		}
 	});
 };
 
-module.exports = sendEmail; */
-const mailgun = require('mailgun-js');
-const logger = require('./logger');
-
-const mg = mailgun({
-	apiKey: '29ef25f7e47cbb6d39c2f1b3d5f30d40-db137ccd-655691ab',
-	domain: 'sandbox365385809aed417ba4f9ba504739810e.mailgun.org',
-});
-
-const sendEmail = async (from, to, subject, message) => {
-	const data = {
-		from,
-		to,
-		subject,
-		html: message,
-	};
-
-	try {
-		await mg.messages().send(data);
-		logger.info('Correo enviado');
-	} catch (error) {
-		logger.error('Error al enviar el correo:', error);
-		throw error;
-	}
-};
-
-module.exports = sendEmail;
+module.exports = sendEmail; 

@@ -18,7 +18,7 @@ class AuthApi{
 			user_id: userId,
 			token: verificateEmailToken
 		}).save();
-		//CAMBIAR URL EN PRODUCCION
+
 		let resetUrl = `${process.env.URL}/api/confirmaremail/${verificateEmailToken}`;
 
 		let message = `
