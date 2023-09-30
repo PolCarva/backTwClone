@@ -1,7 +1,7 @@
-/* //ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
-const socket = io({
+//ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
+const socket = io.connect('https://social-media-clone-gciq.vercel.app',{
 	auth: {
-		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk1MjQ1NTYzfQ.Gcz8NYKy1dXi2gfVdsJdZET22gl36cJZLvXM0BbWZ2E'
+		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjk1OTg4MjM5fQ.f6apyGHsPPYfbMjfx4hQgTk-SjhGQF2I0nxwSTs66qI'
 	}
 });
 
@@ -13,7 +13,7 @@ socket.on('user', (user) => {
 
 let chatId = 1;
 
-socket.emit('get chat id', chatId);
+socket.emit('join chat', chatId);
 
 socket.on('get messages', (messages)=> {
 	console.log(messages);
@@ -33,4 +33,4 @@ form.addEventListener('submit', function(e) {
 
 socket.on('get new message', (messages)=> {
 	console.log(messages);
-}); */
+});
