@@ -1,5 +1,5 @@
 //ESTO TIENE QUE IR EN EL COMPONENTE PRINCIPAL DE LA APP
-const socket = io.connect('https://social-media-clone-gciq.vercel.app',{
+const socket = io.connect('https://socialmediaclone-production-1e63.up.railway.app/',{
 	auth: {
 		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjk1OTg4MjM5fQ.f6apyGHsPPYfbMjfx4hQgTk-SjhGQF2I0nxwSTs66qI'
 	}
