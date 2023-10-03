@@ -3,6 +3,7 @@ const logger = require('../utils/logger');
 const Post = require('../models/post');
 const IncludeOptions = require('./includeOptions');
 const User = require('../models/user');
+const Post_SavedPostsList = require('../models/post_savedPostsList');
 
 class SavedPostsListsDAO{
 	constructor(){
@@ -41,12 +42,7 @@ class SavedPostsListsDAO{
 
 	async addPostToSavedPostsList(userId, postId){
 		try {
-			const savedPostsList = await SavedPostsList.findOne({
-				where:{
-					user_id: userId
-				}
-			});
-			return await savedPostsList.addPost(postId);
+			return await Post_SavedPostsList.create({saved_posts_list_id: userId, post_id: postId});
 		} catch (err) {
 			logger.info(err);
 		}
@@ -54,12 +50,11 @@ class SavedPostsListsDAO{
 
 	async removePostFromSavedPostsList(userId, postId){
 		try {
-			const savedPostsList = await SavedPostsList.findOne({
-				where:{
-					user_id: userId
-				}
-			});
-			return await savedPostsList.removePost(postId);
+			return await Post_SavedPostsList.destroy({
+				where: {
+					saved_posts_list_id: userId,
+					post_id: postId
+				}});
 		} catch (err) {
 			logger.info(err);
 		}
