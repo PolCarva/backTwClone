@@ -96,7 +96,11 @@ app.use('/api', chatsRouter.start());
 app.use('/api', messagessRouter.start());
 
 const { Server } = require('socket.io');
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+	cors:{
+		origin: '*'
+	}
+});
 const logger = require('./utils/logger');
 const jwt = require('jsonwebtoken');
 
@@ -130,9 +134,10 @@ io.use(async(socket, next) => {
 		logger.info(error);
 	}
 	
-	socket.on('get chat id', async(chatId) => {
+	socket.on('join chat', async(chatId) => {
 		try {
 			const messages = await messagesApi.getMessagesInChat(chatId);
+			await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 			
 			socket.emit('get messages', messages);
 		} catch (err) {
