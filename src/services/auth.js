@@ -64,7 +64,7 @@ class AuthApi{
 			token: resetToken
 		}).save();
 
-		let resetUrl = `${process.env.PRODUCTION_URL}/resetpassword/${resetToken}`;
+		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/resetpassword/${resetToken}`;
 
 		let message = `
         <h2>HOLA ${user.username}!</h2>
