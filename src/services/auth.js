@@ -19,7 +19,7 @@ class AuthApi{
 			token: verificateEmailToken
 		}).save();
 
-		let resetUrl = `${process.env.PRODUCTION_URL}/api/confirmaremail/${verificateEmailToken}`;
+		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/api/confirmaremail/${verificateEmailToken}`;
 
 		let message = `
         <h2>BIENVENIDO!</h2>
