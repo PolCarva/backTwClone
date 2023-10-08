@@ -23,10 +23,10 @@ const sendEmail = async(from, to, subject, message) => {
 		// verify connection configuration
 		transporter.verify(function (error, success) {
 			if (error) {
-				console.log(error);
+				logger.error(error);
 				reject(error);
 			} else {
-				console.log('Server is ready to take our messages');
+				logger.info('Server is ready to take our messages');
 				resolve(success);
 			}
 		});
@@ -44,10 +44,10 @@ const sendEmail = async(from, to, subject, message) => {
 		// send mail
 		transporter.sendMail(options, (err, info) => {
 			if (err) {
-				console.error(err);
+				logger.error(err);
 				reject(err);
 			} else {
-				console.log(info);
+				logger.info(info);
 				resolve(info);
 			}
 		});
