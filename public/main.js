@@ -4,6 +4,10 @@ const socket = io.connect('https://socialmediaclone-production-1e63.up.railway.a
 	}
 });
 
+socket.on('connect', () => {
+	console.log('Successfully connected!');
+});
+
 let userData = null;
 
 socket.on('user', (user) => {

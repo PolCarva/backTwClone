@@ -33,12 +33,12 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(cors({
+/* app.use(cors({
 	origin: '*',
 	methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 	allowedHeaders: ['Access-Control-Allow-Origin', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 	credentials: true
-}));
+})); */
 app.use(fileUpload({
 	useTempFiles: true,
 	tempFileDir: './uploads'
@@ -49,9 +49,9 @@ app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
 //ROUTES
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/indexx.html');
-});
+}); */
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
@@ -96,11 +96,7 @@ app.use('/api', chatsRouter.start());
 app.use('/api', messagessRouter.start());
 
 const { Server } = require('socket.io');
-const io = new Server(httpServer, {
-	cors:{
-		origin: '*'
-	}
-});
+const io = new Server(httpServer);
 const logger = require('./utils/logger');
 const jwt = require('jsonwebtoken');
 
