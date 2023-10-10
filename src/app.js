@@ -96,7 +96,11 @@ app.use('/api', chatsRouter.start());
 app.use('/api', messagessRouter.start());
 
 const { Server } = require('socket.io');
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+	cors:{
+		origin: '*'
+	}
+});
 const logger = require('./utils/logger');
 const jwt = require('jsonwebtoken');
 
