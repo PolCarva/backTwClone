@@ -33,12 +33,12 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-/* app.use(cors({
+app.use(cors({
 	origin: '*',
 	methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 	allowedHeaders: ['Access-Control-Allow-Origin', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 	credentials: true
-})); */
+}));
 app.use(fileUpload({
 	useTempFiles: true,
 	tempFileDir: './uploads'
