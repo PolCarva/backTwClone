@@ -123,6 +123,7 @@ io.use(async(socket, next) => {
 	}
 }).on('connection', async(socket) => {
 	try {
+		logger.info('client connected');
 		socket.user.dataValues.online = true;
 		await usersApi.updateUserStatus(socket.user.dataValues.id, true);
 		logger.info(`${socket.user.dataValues.username} connected`);

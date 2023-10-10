@@ -1,11 +1,7 @@
-const socket = io.connect('https://socialmediaclone-production-1e63.up.railway.app',{
+const socket = io('https://socialmediaclone-production-1e63.up.railway.app',{
 	auth: {
 		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk2ODYxMDQwfQ.7XxePWbJSrfFS6NsCMN-NzHCUpHEjIQ_BZuFNfIEOp8'
 	}
-});
-
-socket.on('connect', () => {
-	console.log('Successfully connected!');
 });
 
 let userData = null;
