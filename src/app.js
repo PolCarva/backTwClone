@@ -49,9 +49,9 @@ app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 
 //ROUTES
 
-/* app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/public/indexx.html');
-}); */
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/public/index.html');
+});  
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
@@ -117,7 +117,7 @@ io.use(async(socket, next) => {
 		try {
 			const decoded = jwt.verify(token, 'adsfdcsfeds3w423ewdas');
 			socket.user = await usersApi.getUserById(decoded.id);
-			socket.emit('user', socket.user.dataValues);
+			socket.emit('user', socket.user.dataValues, socket.user.dataValues.id, socket.user.dataValues.online);
 			next();
 		} catch (error) {
 			socket.emit('error', 'token invalido');
@@ -131,15 +131,15 @@ io.use(async(socket, next) => {
 		socket.user.dataValues.online = true;
 		await usersApi.updateUserStatus(socket.user.dataValues.id, true);
 		logger.info(`${socket.user.dataValues.username} connected`);
+
 	} catch (error) {
 		logger.info(error);
 	}
-	
+
 	socket.on('join chat', async(chatId) => {
 		try {
 			const messages = await messagesApi.getMessagesInChat(chatId);
 			await messagesApi.readMessage(socket.user.dataValues.id, chatId);
-			
 			socket.emit('get messages', messages);
 		} catch (err) {
 			logger.info(err);
@@ -148,19 +148,16 @@ io.use(async(socket, next) => {
 
 	socket.on('send message', async(msj, userId, chatId) => {
 		try {
-			await messagesApi.createMessage(msj, userId, chatId);
-			const messages = await messagesApi.getMessagesInChat(chatId);
-			socket.emit('get new message', messages);
+			const newMessage = await messagesApi.createMessage(msj, userId, chatId);
+			io.emit('get new message', newMessage);
 		} catch (err) {
 			logger.info(err);
 		}
 
-	});
-
-	socket.on('disconnect', async() => {
-		await usersApi.updateUserStatus(socket.user.dataValues.id, false);
-		logger.info(`${socket.user.dataValues.username} disconnected`);
-	});
-});  
-
+		socket.on('disconnect', async() => {
+			await usersApi.updateUserStatus(socket.user.dataValues.id, false);
+			logger.info(`${socket.user.dataValues.username} disconnected`);
+		});
+	});  
+}); 
 module.exports = httpServer;

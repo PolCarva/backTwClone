@@ -9,7 +9,8 @@ class ChatsController{
 	createChat = asyncHandler(async(req, res) => {
 		try {
 			const chat = await this.chatsApi.createChat(req.user.id, req.params.userid);
-			res.json({success: true, message: 'chat creado', chatId: chat[0].dataValues.chat_id}).status(200);
+			console.log(chat);
+			res.json({success: true, message: 'ir al chat', chatId: chat[0] ? chat[0].dataValues.chat_id : chat}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);
 		}

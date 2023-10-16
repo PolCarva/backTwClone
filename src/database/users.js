@@ -90,9 +90,9 @@ class UsersDAO{
 		}
 	}
 
-	async updateUserData(userId, username, fullName, profilePhoto){
+	async updateUserData(userId, username, fullName, profilePhoto, bio, dayOfBirth){
 		try{
-			return User.update({username, full_name: fullName, profile_photo: profilePhoto}, {
+			return User.update({username, full_name: fullName, profile_photo: profilePhoto, bio, day_of_birth: dayOfBirth}, {
 				where: {
 					id: userId
 				}

@@ -1,6 +1,6 @@
-const socket = io('https://socialmediaclone-production-1e63.up.railway.app',{
+const socket = io({
 	auth: {
-		token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjk2ODYxMDQwfQ.7XxePWbJSrfFS6NsCMN-NzHCUpHEjIQ_BZuFNfIEOp8'
+		token: `Bearer ${localStorage.getItem('token')}`
 	}
 });
 
@@ -25,7 +25,7 @@ var input = document.getElementById('input');
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
 	if (input.value && userData) {
-		socket.emit('send message', input.value, userData.id, 1);
+		socket.emit('send message', input.value, userData.id, chatId);
 		input.value = '';
 	}
 });
