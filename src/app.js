@@ -146,6 +146,10 @@ io.use(async(socket, next) => {
 		}
 	});
 
+	socket.on('is typing', (username) => {
+		socket.broadcast.emit('is typing', username);
+	});
+
 	socket.on('send message', async(msj, userId, chatId) => {
 		try {
 			const newMessage = await messagesApi.createMessage(msj, userId, chatId);

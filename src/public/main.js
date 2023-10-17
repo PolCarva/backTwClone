@@ -22,12 +22,20 @@ socket.on('get messages', (messages)=> {
 var form = document.getElementById('form');
 var input = document.getElementById('input');
 
+input.addEventListener('keypress', () => {
+	socket.emit('is typing', userData.username);
+});
+
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
 	if (input.value && userData) {
-		socket.emit('send message', input.value, userData.id, chatId);
+		socket.emit('send message', input.value, userData.id, chatId, 2);
 		input.value = '';
 	}
+});
+
+socket.on('is typing', (username) => {
+	console.log(`${username} is typing...`);
 });
 
 socket.on('get new message', (messages)=> {
