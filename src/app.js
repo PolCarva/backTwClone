@@ -108,6 +108,9 @@ const UsersApi = require('./services/users');
 const usersApi = new UsersApi();
 const MessagesApi = require('./services/messages');
 const messagesApi = new MessagesApi();
+const ChatsApi = require('./services/chats');
+const chatsApi = new ChatsApi();
+
 
 io.use(async(socket, next) => {
 	const authorizationHeader = socket.handshake.auth.token;
@@ -152,8 +155,9 @@ io.use(async(socket, next) => {
 
 	socket.on('send message', async(msj, userId, chatId) => {
 		try {
+			const usersId = await chatsApi.getChatUsers(chatId);
 			const newMessage = await messagesApi.createMessage(msj, userId, chatId);
-			io.emit('get new message', newMessage);
+			io.emit('get new message', {newMessage, chatId, usersId: [usersId[0].dataValues.user_id, usersId[1].dataValues.user_id]});
 		} catch (err) {
 			logger.info(err);
 		}

@@ -15,7 +15,25 @@ class ChatsApi{
 		const withWhoIAmChattingId = await this.chatsUsersDAO.getWithWhoIAmChatting(userId);
 		const withWhoIAmChattingUser = await this.usersApi.getUsersById(withWhoIAmChattingId[0]);
 
-		return withWhoIAmChattingUser.map(({id, profile_photo, username, full_name}) => ({id, profile_photo, username, full_name, chat_id: withWhoIAmChattingId[1][withWhoIAmChattingUser.findIndex(user => user.id === id)]}));
+		return withWhoIAmChattingUser.map(({id, profile_photo, username, full_name}) => (
+			{	
+				id, 
+				profile_photo, 
+				username, 
+				full_name, 
+				chat_id: withWhoIAmChattingId[1][withWhoIAmChattingUser.findIndex(user => user.id === id)], 
+				lastMessage: {
+					message: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.message, 
+					time: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.createdAt, 
+					readed: userId === withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.user_id ? true : withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.readed, 
+					id: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.id
+				}
+			}
+		));
+	} 
+
+	async getChatUsers(chatId){
+		return await this.chatsUsersDAO.getUsersInChat(chatId);
 	}
 
 }

@@ -1,7 +1,8 @@
 const { Op, Sequelize } = require('sequelize');
 const ChatUser = require('../models/chat_user');
-const logger = require('../utils/logger');
 const Chat = require('../models/chat');
+const Message = require('../models/message');
+const logger = require('../utils/logger');
 
 class ChatsUsersDAO{
 
@@ -45,11 +46,13 @@ class ChatsUsersDAO{
 				}
 			});
 
+			const chatIdsMap = chatIds.map(chat => chat.chat_id);
+
 			const withWhoIAmChatting = await ChatUser.findAll({
 				attributes: ['user_id'],
 				where: {
 					chat_id: {
-						[Op.in]: chatIds.map(chat => chat.chat_id)
+						[Op.in]: chatIdsMap
 					},
 					user_id: {
 						[Op.ne]: userId
@@ -57,7 +60,33 @@ class ChatsUsersDAO{
 				}
 			});
 
-			return [withWhoIAmChatting.map(chat => chat.user_id), chatIds.map(chat => chat.dataValues.chat_id)];
+			const lastMessagePromises = chatIdsMap.map(async (chatId) => {
+				return Message.findOne({
+					attributes: ['id', 'message', 'createdAt', 'readed', 'user_id'],
+					where: {
+						chat_id: chatId
+					},
+					order: [['createdAt', 'DESC']]
+				});
+			});		  
+
+			const lastMessageOfChats = await Promise.all(lastMessagePromises);	
+
+			return [withWhoIAmChatting.map(chat => chat.user_id), chatIds.map(chat => chat.dataValues.chat_id), lastMessageOfChats];
+		} catch (err) {
+			logger.info(err);
+			throw new Error(err.message);
+		}
+	}
+
+	async getUsersInChat(chatId){
+		try {
+			return await ChatUser.findAll({
+				attributes: ['user_id'],
+				where:{
+					chat_id: chatId
+				}
+			});
 		} catch (err) {
 			logger.info(err);
 			throw new Error(err.message);
