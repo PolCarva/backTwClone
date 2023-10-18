@@ -1,5 +1,7 @@
+const { Op } = require('sequelize');
 const Message = require('../models/message');
 const logger = require('../utils/logger');
+
 
 class MessagesDAO{
 
@@ -34,9 +36,10 @@ class MessagesDAO{
 	async readMessage(userId, chatId){
 		try{
 			return await Message.update(
-				{readed: true}, {
+				{ readed: true },
+				{
 					where: {
-						user_id: !userId,
+						user_id: { [Op.not]: userId },
 						chat_id: chatId,
 						readed: false
 					}

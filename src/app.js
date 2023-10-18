@@ -136,7 +136,7 @@ io.use(async(socket, next) => {
 			} catch (err) {
 				logger.info(err);
 			}
-		});
+		}); 
 		logger.info('client connected');
 		socket.user.dataValues.online = true;
 		await usersApi.updateUserStatus(socket.user.dataValues.id, true);
@@ -156,8 +156,8 @@ io.use(async(socket, next) => {
 		}
 	});
 
-	socket.on('is typing', (username) => {
-		socket.broadcast.emit('is typing', username);
+	socket.on('is typing', (username, chatId) => {
+		socket.broadcast.emit('is typing', {username, chatId});
 	});
 
 	socket.on('send message', async(msj, userId, chatId) => {
@@ -171,7 +171,6 @@ io.use(async(socket, next) => {
 
 		socket.on('disconnect', async() => {
 			await usersApi.updateUserStatus(socket.user.dataValues.id, false);
-			
 			logger.info(`${socket.user.dataValues.username} disconnected`);
 		});
 	});  
