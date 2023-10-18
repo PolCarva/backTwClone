@@ -15,6 +15,7 @@ class IncludeOptions{
 			this.getRetweetIncludeOption(),
 			this.getFollowersListIncludeOption(),
 			this.getFollowingListIncludeOption(),
+			this.getSavedPostsListIncludeOption()
 		];
 	}
 

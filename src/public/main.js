@@ -4,10 +4,14 @@ const socket = io({
 	}
 });
 
-let userData = null;
+let userData = [];
 
 socket.on('user', (user) => {
-	userData = user;
+	userData.push(user.id);
+	if(user.online === false){
+		userData.filter(id => user.id !== id);
+	}
+	console.log(userData);
 });
 
 let chatId = 1;

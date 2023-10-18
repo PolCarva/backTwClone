@@ -43,9 +43,8 @@ class AuthController{
 			const {token} = req.params;
 			await this.authApi.validateUser(token);
 			const user = await this.authApi.findOneTokenByToken(token);
-			const jwtToken = jwt.sign({ id: user.dataValues.user_id}, 'adsfdcsfeds3w423ewdas');
 			await this.notificationsApi.createNotification(welcomeTitle(), welcomeMessage(), user.id, 'others', null, null, null);
-			res.status(201).json({ success: true, message: 'usuario validado', token: jwtToken  });
+			res.status(201).json({ success: true, message: 'usuario validado inicie sesion para usar la app'});
 		} catch (error) {
 			console.log(error);
 			res.status(500).json({success: false, message: 'hubo un error ' + error});
@@ -65,7 +64,8 @@ class AuthController{
 				async (error) => {
 					if (error) return next(error);            
 					const token = jwt.sign({ id: user.id}, 'adsfdcsfeds3w423ewdas');
-					return res.status(201).json({ success: true, message: 'sesion iniciada', token: `${token}`, user });
+					const userData = await this.usersApi.getUserById(user.id);
+					return res.status(201).json({ success: true, message: 'sesion iniciada', token: `${token}`, user, savedPostsList: userData.dataValues.SavedPostsList.dataValues.Posts });
 				});
 		})(req, res, next);
 	});

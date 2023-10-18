@@ -120,7 +120,6 @@ io.use(async(socket, next) => {
 		try {
 			const decoded = jwt.verify(token, 'adsfdcsfeds3w423ewdas');
 			socket.user = await usersApi.getUserById(decoded.id);
-			socket.emit('user', socket.user.dataValues, socket.user.dataValues.id, socket.user.dataValues.online);
 			next();
 		} catch (error) {
 			socket.emit('error', 'token invalido');
@@ -130,6 +129,14 @@ io.use(async(socket, next) => {
 	}
 }).on('connection', async(socket) => {
 	try {
+		socket.on('get user id', async(id) => {
+			try {
+				const user = await usersApi.getUserById(id);
+				socket.emit('get user', user.dataValues);
+			} catch (err) {
+				logger.info(err);
+			}
+		});
 		logger.info('client connected');
 		socket.user.dataValues.online = true;
 		await usersApi.updateUserStatus(socket.user.dataValues.id, true);
@@ -164,6 +171,7 @@ io.use(async(socket, next) => {
 
 		socket.on('disconnect', async() => {
 			await usersApi.updateUserStatus(socket.user.dataValues.id, false);
+			
 			logger.info(`${socket.user.dataValues.username} disconnected`);
 		});
 	});  
