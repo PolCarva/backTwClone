@@ -21,13 +21,7 @@ class ChatsApi{
 				profile_photo, 
 				username, 
 				full_name, 
-				chat_id: withWhoIAmChattingId[1][withWhoIAmChattingUser.findIndex(user => user.id === id)], 
-				lastMessage: {
-					message: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.message, 
-					time: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.createdAt, 
-					readed: userId === withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.user_id ? true : withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.readed, 
-					id: withWhoIAmChattingId[2][withWhoIAmChattingUser.findIndex(user => user.id === id)].dataValues.id
-				}
+				chat_id: withWhoIAmChattingId[1][withWhoIAmChattingUser.findIndex(user => user.id === id)]
 			}
 		));
 	} 

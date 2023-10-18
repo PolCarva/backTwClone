@@ -58,21 +58,10 @@ class ChatsUsersDAO{
 						[Op.ne]: userId
 					}
 				}
-			});
+			});  
 
-			const lastMessagePromises = chatIdsMap.map(async (chatId) => {
-				return Message.findOne({
-					attributes: ['id', 'message', 'createdAt', 'readed', 'user_id'],
-					where: {
-						chat_id: chatId
-					},
-					order: [['createdAt', 'DESC']]
-				});
-			});		  
 
-			const lastMessageOfChats = await Promise.all(lastMessagePromises);	
-
-			return [withWhoIAmChatting.map(chat => chat.user_id), chatIds.map(chat => chat.dataValues.chat_id), lastMessageOfChats];
+			return [withWhoIAmChatting.map(chat => chat.user_id), chatIds.map(chat => chat.dataValues.chat_id)];
 		} catch (err) {
 			logger.info(err);
 			throw new Error(err.message);
