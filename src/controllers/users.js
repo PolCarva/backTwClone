@@ -14,7 +14,7 @@ class UsersController{
 
 			res.json({success: true, message: 'usuario actualizado'}).status(200);
 		} catch (err) {
-			res.json({success: false, message: err}).status(500);
+			res.json({success: false, message: err.message}).status(500);
 		}
 	});
 
