@@ -35,6 +35,12 @@ const User = sequelize.define('User',{
 		type: DataTypes.STRING,
 		allowNull: false
 	},
+	bio:{
+		type: DataTypes.STRING,
+	},
+	day_of_birth:{
+		type: DataTypes.DATE
+	},
 	activated:{
 		type: DataTypes.BOOLEAN,
 		defaultValue: false

@@ -25,9 +25,9 @@ class UsersApi{
 	async updateUserChats(userId, chatId){
 	}
 
-	async updateUserData(profilePhotoFile, fileName, userId, username, fullName, fileUrl){
+	async updateUserData(profilePhotoFile, fileName, userId, username, fullName, bio, dayOfBirth, fileUrl){
 		await uploadFile(profilePhotoFile, fileName);
-		return await this.usersDAO.updateUserData(userId, username, fullName, fileUrl);
+		return await this.usersDAO.updateUserData(userId, username, fullName, fileUrl, bio, dayOfBirth);
 	}
 
 	async updateUserStatus(userId, online){

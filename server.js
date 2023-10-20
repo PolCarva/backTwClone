@@ -30,7 +30,7 @@ async function server (){
 		});
 	}else{ */
 
-	await sequelize.sync({alter: true}).then(() => {
+	await sequelize.sync({force: true}).then(() => {
 		logger.info('All models were synchronized successfully.');
 	}).catch((err) => {
 		logger.info(err);
