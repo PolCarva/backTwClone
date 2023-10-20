@@ -26,7 +26,7 @@ class SavedPostsListsController{
 
 	removePostFromSavedPostsLists = asyncHandler(async(req, res) => {
 		try {
-			await this.savedPostsListsApi.removePostFromSavedPostsList(req.user.id, req.params.postid);
+			await this.savedPostsListsApi.removePostFromSavedPostsList(req.params.postid, req.user.id);
 			res.json({success: true, message: 'post eliminado de guardados'}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err}).status(500);
