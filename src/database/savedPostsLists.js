@@ -40,9 +40,9 @@ class SavedPostsListsDAO{
 		}
 	}
 
-	async addPostToSavedPostsList(userId, postId){
+	async addPostToSavedPostsList(postId, userId){
 		try {
-			return await Post_SavedPostsList.create({saved_posts_list_id: userId, post_id: postId});
+			return await Post_SavedPostsList.create({post_id: postId, saved_posts_list_id: userId});
 		} catch (err) {
 			logger.info(err);
 		}

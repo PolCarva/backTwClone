@@ -129,6 +129,17 @@ io.use(async(socket, next) => {
 	}
 }).on('connection', async(socket) => {
 	try {
+		logger.info('client connected');
+		const users = [];
+		for (let [id, socket] of io.of('/').sockets) {
+			const user = await usersApi.getUserById(socket.user.dataValues.id);
+			user.dataValues.online = true;
+			users.push(user.dataValues);
+		}
+		
+		socket.emit('users', users);
+		logger.info(`${socket.user.dataValues.username} connected`);
+
 		socket.on('get user id', async(id) => {
 			try {
 				const user = await usersApi.getUserById(id);
@@ -136,11 +147,7 @@ io.use(async(socket, next) => {
 			} catch (err) {
 				logger.info(err);
 			}
-		}); 
-		logger.info('client connected');
-		socket.user.dataValues.online = true;
-		await usersApi.updateUserStatus(socket.user.dataValues.id, true);
-		logger.info(`${socket.user.dataValues.username} connected`);
+		});  
 
 	} catch (error) {
 		logger.info(error);
@@ -164,6 +171,7 @@ io.use(async(socket, next) => {
 		try {
 			const usersId = await chatsApi.getChatUsers(chatId);
 			const newMessage = await messagesApi.createMessage(msj, userId, chatId);
+			
 			io.emit('get new message', {newMessage, chatId, usersId: [usersId[0].dataValues.user_id, usersId[1].dataValues.user_id]});
 		} catch (err) {
 			logger.info(err);

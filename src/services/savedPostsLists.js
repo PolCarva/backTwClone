@@ -9,8 +9,8 @@ class SavedPostsListsApi{
 		return await this.savedPostsListsDAO.getSavedPostsList(userId);
 	}
 
-	async addPostToSavedPostsList(userId, postId){
-		return await this.savedPostsListsDAO.addPostToSavedPostsList(userId, postId);
+	async addPostToSavedPostsList(postId, userId){
+		return await this.savedPostsListsDAO.addPostToSavedPostsList(postId, userId);
 	}
 
 	async removePostFromSavedPostsList(userId, postId){
