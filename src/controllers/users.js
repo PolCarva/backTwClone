@@ -8,9 +8,9 @@ class UsersController{
 	//SI NO PUEDO VISUALIZAR LA FOTO DE PERFIL, REVISAR EL BUCKET Y DESTILDAR LA OPCION DE BLOQUEAR ACCESO
 	updateUserData = asyncHandler(async(req, res) => {
 		try {
-			const{username, fullName} = req.body;
+			const{username, fullName, bio, birthday} = req.body;
 			const{id} = req.user;
-			await this.usersApi.updateUserData(req.files.file.tempFilePath, req.files.file.name, id, username, fullName, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${req.files.file.name}`);
+			await this.usersApi.updateUserData(req.files.file.tempFilePath, req.files.file.name, id, username, fullName,  bio, birthday, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${req.files.file.name}`);
 
 			res.json({success: true, message: 'usuario actualizado'}).status(200);
 		} catch (err) {

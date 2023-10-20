@@ -130,14 +130,6 @@ io.use(async(socket, next) => {
 }).on('connection', async(socket) => {
 	try {
 		logger.info('client connected');
-		const users = [];
-		for (let [id, socket] of io.of('/').sockets) {
-			const user = await usersApi.getUserById(socket.user.dataValues.id);
-			user.dataValues.online = true;
-			users.push(user.dataValues);
-		}
-		
-		socket.emit('users', users);
 		logger.info(`${socket.user.dataValues.username} connected`);
 
 		socket.on('get user id', async(id) => {
