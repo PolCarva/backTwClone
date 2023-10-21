@@ -26,8 +26,12 @@ class UsersApi{
 	}
 
 	async updateUserData(profilePhotoFile, fileName, userId, username, fullName, bio, dayOfBirth, fileUrl){
-		await uploadFile(profilePhotoFile, fileName);
-		return await this.usersDAO.updateUserData(userId, username, fullName, fileUrl, bio, dayOfBirth);
+		if(profilePhotoFile && fileName && fileUrl){
+			await uploadFile(profilePhotoFile, fileName);
+		}
+
+		await this.usersDAO.updateUserData(userId, username, fullName, fileUrl, bio, dayOfBirth);
+		return await this.usersDAO.getUserById(userId);
 	}
 
 	async updateUserStatus(userId, online){
