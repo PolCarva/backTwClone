@@ -1,13 +1,13 @@
-const socket = io({
+/* const socket = io({
 	auth: {
 		token: `Bearer ${localStorage.getItem('token')}`
 	}
 });
 
-let userData = null;
 
-socket.on('user', (user) => {
-	userData = user;
+
+socket.on('users connected', (activeUsers) => {
+	console.log(activeUsers);
 });
 
 let chatId = 1;
@@ -40,4 +40,4 @@ socket.on('is typing', (username) => {
 
 socket.on('get new message', (messages)=> {
 	console.log(messages);
-}); 
+});  */

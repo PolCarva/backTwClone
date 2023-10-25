@@ -25,7 +25,7 @@ class PostsApi{
 			let wordsWithArroba = text.match(/\B@\S+/g);
 			const transformedText = transformUserMention(wordsWithArroba, text);
 			const post = await this.postsDAO.createPost({user_id: userId, text, file: fileUrl });
-			await mention(transformedText, userId, userUsername, post.dataValues.id);
+			await mention(transformedText, userId, userUsername, post.dataValues.id, 'post');
 		}else{
 			return await this.postsDAO.createPost({user_id: userId, text, file: fileUrl });
 		}

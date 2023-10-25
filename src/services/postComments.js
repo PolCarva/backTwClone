@@ -23,7 +23,7 @@ class PostCommentsApi{
 			let wordsWithArroba = comment.match(/\B@\S+/g);
 			const transformedText = transformUserMention(wordsWithArroba, comment);
 			await this.postCommentsDAO.createPostComment({user_id: userId, comment: transformedText, post_id: postId});
-			await mention(transformedText, userId, userUsername, postId);
+			await mention(transformedText, userId, userUsername, postId, 'comentario');
 		}else{
 			return await this.postCommentsDAO.createPostComment({user_id: userId, comment, post_id: postId});
 		}

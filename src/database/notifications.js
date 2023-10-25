@@ -7,6 +7,18 @@ class NotificationsDAO extends NotificationFactory{
 		super();
 	}
 
+	async getAllUserNotifications(userId){
+		try {
+			return await Notification.findAll({
+				where:{
+					user_id: userId
+				}
+			});
+		} catch (err) {
+			logger.info(err);
+		}
+	}
+
 	async getUserNotificationByMessage(userId, message){
 		try {
 			return await Notification.findOne({

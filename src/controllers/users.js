@@ -10,7 +10,7 @@ class UsersController{
 		try {
 			const{username, fullName, bio, dayOfBirth} = req.body;
 			const{id} = req.user;
-			const newUser = await this.usersApi.updateUserData(req.files?.file.tempFilePath, req.files?.file.name, id, `@${username}`, fullName,  bio, dayOfBirth, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${req.files?.file.name}`);
+			const newUser = await this.usersApi.updateUserData(req.files?.file.tempFilePath, req.files?.file.name, id, username, fullName,  bio, dayOfBirth, `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${req.files?.file.name}`);
 			res.json({success: true, message: 'usuario actualizado', newUser}).status(200);
 		} catch (err) {
 			res.json({success: false, message: err.message}).status(500);

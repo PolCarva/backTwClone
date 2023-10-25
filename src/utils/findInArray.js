@@ -1,4 +1,3 @@
-
 const findElementInArray = (arr, start, end, target) => {
 	if(start > end){
 		return false;
