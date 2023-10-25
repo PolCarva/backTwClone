@@ -1,4 +1,4 @@
-/* const socket = io({
+const socket = io({
 	auth: {
 		token: `Bearer ${localStorage.getItem('token')}`
 	}
@@ -40,4 +40,4 @@ socket.on('is typing', (username) => {
 
 socket.on('get new message', (messages)=> {
 	console.log(messages);
-});  */
+}); 

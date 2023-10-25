@@ -136,12 +136,12 @@ io.use(async(socket, next) => {
 			socketId: socket.id
 		});
 	}
+
 	console.log('users connected', activeUsers);
 	io.emit('users connected', activeUsers);
 
 	socket.on('disconnect', () => {
 		activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-		logger.info('user disconnected', activeUsers);
 		io.emit('users connected', activeUsers);
 	});
 	
@@ -164,7 +164,8 @@ io.use(async(socket, next) => {
 		}
 	});
 
-	socket.on('is typing', (username, chatId) => {
+	socket.on('is typing', async(username, chatId) => {
+		await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 		socket.broadcast.emit('is typing', {username, chatId});
 	});
 
