@@ -46,13 +46,14 @@ class NotificationsDAO extends NotificationFactory{
 		}
 	}
 
-	async markNotificationAsReaded(){
+	async markNotificationAsReaded(userId){
 		try {
 			return await Notification.update({ 
 				readed: true 
 			}, {
 				where: {
 					readed: false,
+					user_id: userId
 				},
 			});
 		} catch (err) {
