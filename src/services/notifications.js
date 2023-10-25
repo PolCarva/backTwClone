@@ -19,7 +19,7 @@ class NotificationsApi{
 	}   
 
 	async getAllUserNotifications(userId){
-		await this.notificationsDAO.markNotificationAsReaded();
+		//await this.notificationsDAO.markNotificationAsReaded();
 		return await this.notificationsDAO.getAllUserNotifications(userId);
 	}
 
