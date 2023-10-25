@@ -19,7 +19,7 @@ class NotificationsApi{
 	}   
 
 	async getAllUserNotifications(userId){
-		await this.notificationsDAO.getAllUserNotifications(userId);
+		return await this.notificationsDAO.getAllUserNotifications(userId);
 	}
 
 	async deleteNotification(notificationType, id){
