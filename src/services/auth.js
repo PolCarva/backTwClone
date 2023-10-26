@@ -87,6 +87,7 @@ class AuthApi{
 		const token = await this.TokenDAO.findOneTokenByToken(newToken);
 
 		if(newPassword === confirmNewPassword){
+			console.log(token.user_id);
 			await this.usersDAO.updateUserPassword(token.user_id, hash(newPassword));
 		}else{
 			throw new Error('las contrasenias no son iguales');
