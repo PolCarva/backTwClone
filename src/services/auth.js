@@ -64,7 +64,7 @@ class AuthApi{
 			token: resetToken
 		}).save();
 
-		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/resetpassword/${resetToken}`;
+		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/api/resetpassword/${resetToken}`;
 
 		let message = `
         <h2>HOLA ${user.username}!</h2>
@@ -72,7 +72,6 @@ class AuthApi{
         <p>el link es valido por una hora</p> 
         <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
         <p>Saludos...</p> `;
-        
 
 		let from = process.env.EMAIL_USER;
 
