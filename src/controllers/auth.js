@@ -81,7 +81,7 @@ class AuthController{
 
 	resetPasswordUI = asyncHandler(async(req, res) => {
 		try {
-			res.sendFile(__dirname + '/public/changePassword.html');
+			res.sendFile(__dirname + './public/changePassword.html');
 		} catch (err) {
 			res.status(500).json({success: false, message: err.message});
 		}
