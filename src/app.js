@@ -160,7 +160,7 @@ io.use(async(socket, next) => {
 	socket.on('join chat', async(chatId) => {
 		try {
 			const messages = await messagesApi.getMessagesInChat(chatId);
-			//await messagesApi.readMessage(socket.user.dataValues.id, chatId);
+			await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 			socket.emit('get messages', messages);
 		} catch (err) {
 			logger.info(err);
@@ -168,7 +168,7 @@ io.use(async(socket, next) => {
 	});
 
 	socket.on('is typing', async(username, chatId) => {
-		//await messagesApi.readMessage(socket.user.dataValues.id, chatId);
+		await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 		socket.broadcast.emit('is typing', {username, chatId});
 	});
 
