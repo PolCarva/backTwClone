@@ -84,7 +84,12 @@ class UsersDAO{
 
 	async updateUserPassword(userId, newPassword){
 		try{
-			return User.update({id: userId}, {password: newPassword});
+			return User.update({password: newPassword},{
+				where:{
+					id: userId
+				}
+			}
+			);
 		}catch(err){
 			logger.info(err);
 		}

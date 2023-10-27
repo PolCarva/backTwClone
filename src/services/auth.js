@@ -83,11 +83,9 @@ class AuthApi{
 	}
 
 	async resetPassword(tokenParam, newPassword, confirmNewPassword){
-		const newToken = tokenParam.slice(0, -1);
-		const token = await this.TokenDAO.findOneTokenByToken(newToken);
+		const token = await this.TokenDAO.findOneTokenByToken(tokenParam);
 
 		if(newPassword === confirmNewPassword){
-			console.log(token.user_id);
 			await this.usersDAO.updateUserPassword(token.user_id, hash(newPassword));
 		}else{
 			throw new Error('las contrasenias no son iguales');

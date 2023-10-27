@@ -52,6 +52,9 @@ app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 app.get('/resetpassword/:token', (req, res) => {
 	res.sendFile(__dirname + '/public/changePassword.html');
 });   
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/public/index.html');
+});   
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
@@ -157,7 +160,7 @@ io.use(async(socket, next) => {
 	socket.on('join chat', async(chatId) => {
 		try {
 			const messages = await messagesApi.getMessagesInChat(chatId);
-			await messagesApi.readMessage(socket.user.dataValues.id, chatId);
+			//await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 			socket.emit('get messages', messages);
 		} catch (err) {
 			logger.info(err);
@@ -165,7 +168,7 @@ io.use(async(socket, next) => {
 	});
 
 	socket.on('is typing', async(username, chatId) => {
-		await messagesApi.readMessage(socket.user.dataValues.id, chatId);
+		//await messagesApi.readMessage(socket.user.dataValues.id, chatId);
 		socket.broadcast.emit('is typing', {username, chatId});
 	});
 

@@ -4,8 +4,6 @@ const socket = io({
 	}
 });
 
-
-
 socket.on('users connected', (activeUsers) => {
 	console.log(activeUsers);
 });
@@ -23,13 +21,13 @@ var form = document.getElementById('form');
 var input = document.getElementById('input');
 
 input.addEventListener('keypress', () => {
-	socket.emit('is typing', userData.username);
+	socket.emit('is typing', 'usuario 2');
 });
 
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
-	if (input.value && userData) {
-		socket.emit('send message', input.value, userData.id, chatId, 2);
+	if (input.value) {
+		socket.emit('send message', input.value, 2, chatId);
 		input.value = '';
 	}
 });
