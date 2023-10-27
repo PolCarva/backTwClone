@@ -52,9 +52,9 @@ app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 app.get('/resetpassword/:token', (req, res) => {
 	res.sendFile(__dirname + '/public/changePassword.html');
 });   
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/index.html');
-});   
+});    */
 
 const AuthRouter  = require('./routes/auth');
 const PostsRouter  = require('./routes/posts');
