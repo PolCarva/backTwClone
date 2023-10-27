@@ -175,7 +175,7 @@ io.use(async(socket, next) => {
 	socket.on('send message', async(msj, userId, chatId) => {
 		try {
 			const usersId = await chatsApi.getChatUsers(chatId);
-			io.emit({msj, chatId, usersId: [usersId[0].dataValues.user_id, usersId[1].dataValues.user_id]});
+			io.emit('get new message', {msj, chatId, usersId: [usersId[0].dataValues.user_id, usersId[1].dataValues.user_id]});
 			await messagesApi.createMessage(msj, userId, chatId);
 			
 		} catch (err) {

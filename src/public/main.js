@@ -8,7 +8,7 @@ socket.on('users connected', (activeUsers) => {
 	console.log(activeUsers);
 });
 
-let chatId = 1;
+let chatId = 4;
 
 socket.emit('join chat', chatId);
 
@@ -27,7 +27,7 @@ input.addEventListener('keypress', () => {
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
 	if (input.value) {
-		socket.emit('send message', input.value, 2, chatId);
+		socket.emit('send message', input.value, 2, 4);
 		input.value = '';
 	}
 });
