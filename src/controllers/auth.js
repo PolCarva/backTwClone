@@ -27,12 +27,12 @@ class AuthController{
 					resolve(user);
 				});
 			})(req, res, next);
-		});
+		}); 
 		
 		try {
 			const newUser = await newUserPromise;
-			await this.authApi.verificateEmail(newUser.email, newUser.id);
-			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail', user: newUser });
+			await this.authApi.verificateEmail(newUser.email, newUser.id); 
+			res.status(201).json({ success: true, message: 'usuario registrado, verificar mail' });
 		} catch (err) {
 			next(err);
 		}
