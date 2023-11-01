@@ -19,7 +19,7 @@ class AuthApi{
 			token: verificateEmailToken
 		}).save();
 
-		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/api/confirmaremail/${verificateEmailToken}`;
+		let resetUrl = `https://backtwclone-production.up.railway.app/api/confirmaremail/${verificateEmailToken}`;
 
 		let message = `
         <h2>BIENVENIDO!</h2>
@@ -64,7 +64,7 @@ class AuthApi{
 			token: resetToken
 		}).save();
 
-		let resetUrl = `https://socialmediaclone-production-1e63.up.railway.app/resetpassword/${resetToken}`;
+		let resetUrl = `https://backtwclone-production.up.railway.app/api/resetpassword/${resetToken}`;
 
 		let message = `
         <h2>HOLA ${user.username}!</h2>
