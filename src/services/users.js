@@ -24,30 +24,18 @@ class UsersApi {
 
   async updateUserChats(userId, chatId) {}
 
-  async updateUserData(
-    profilePhotoFile,
-    fileName,
-    userId,
-    username,
-    bio,
-    fullName,
-    fileUrl
-  ) {
-    const user = await this.getUserById(userId);
+  async updateUserData(profilePhotoFile, fileName, userId, username, bio, fullName, fileUrl){
+		const user = await this.getUserById(userId);
 
-    if (profilePhotoFile && fileName && fileUrl) {
-      await uploadFile(profilePhotoFile, fileName);
-    }
+		if(profilePhotoFile && fileName && fileUrl){
+			await uploadFile(profilePhotoFile, fileName);
+			await this.usersDAO.updateUserData(userId, username, fullName, fileUrl, bio);
+			return await this.getUserById(userId);
+		}
 
-    await this.usersDAO.updateUserData(
-      userId,
-      username || user.dataValues.username,
-      fullName || user.dataValues.full_name,
-      fileUrl || user.dataValues.profile_photo,
-      bio || user.dataValues.bio
-    );
-    return user;
-  }
+		await this.usersDAO.updateUserData(userId, username, fullName, user.dataValues.profile_photo, bio);
+		return await this.getUserById(userId);
+	}
 
   async updateUserStatus(userId, online) {
     return await this.usersDAO.updateUserStatus(userId, online);
