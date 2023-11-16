@@ -150,9 +150,9 @@ io.use(async (socket, next) => {
     socket.emit("error", "Se requiere autenticación");
   }
 }).on("connection", async (socket) => {
-  if (!activeUsers.some((user) => user.id === socket.user?.dataValues?.id)) {
+  if (!activeUsers.some((user) => user.id === socket.user.dataValues.id)) {
     activeUsers.push({
-      userId: socket.user?.dataValues?.id || 1,
+      userId: socket.user.dataValues.id,
       socketId: socket.id,
     });
   }
@@ -177,7 +177,7 @@ io.use(async (socket, next) => {
   socket.on("join chat", async (chatId) => {
     try {
       const messages = await messagesApi.getMessagesInChat(chatId);
-      await messagesApi.readMessage(socket.user.dataValues?.id, chatId);
+      await messagesApi.readMessage(socket.user.dataValues.id, chatId);
       socket.emit("get messages", messages);
     } catch (err) {
       logger.info(err);
@@ -185,7 +185,7 @@ io.use(async (socket, next) => {
   });
 
   socket.on("is typing", async (username, chatId) => {
-    await messagesApi.readMessage(socket.user.dataValues?.id, chatId);
+    await messagesApi.readMessage(socket.user.dataValues.id, chatId);
     socket.broadcast.emit("is typing", { username, chatId });
   });
 
@@ -195,7 +195,7 @@ io.use(async (socket, next) => {
       const newMessage = await messagesApi.createMessage(msj, userId, chatId);
       io.emit("get new message", {
         newMessage,
-        usersId: [usersId[0].dataValues?.user_id, usersId[1].dataValues?.user_id],
+        usersId: [usersId[0].dataValues.user_id, usersId[1].dataValues.user_id],
       });
     } catch (err) {
       logger.info(err);
