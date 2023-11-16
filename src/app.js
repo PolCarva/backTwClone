@@ -152,7 +152,7 @@ io.use(async (socket, next) => {
 }).on("connection", async (socket) => {
   if (!activeUsers.some((user) => user.id === socket.user.dataValues?.id)) {
     activeUsers.push({
-      userId: socket.user.dataValues?.id,
+      userId: socket.user.dataValues?.id || 1,
       socketId: socket.id,
     });
   }
