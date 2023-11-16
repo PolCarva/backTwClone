@@ -150,9 +150,9 @@ io.use(async (socket, next) => {
     socket.emit("error", "Se requiere autenticación");
   }
 }).on("connection", async (socket) => {
-  if (!activeUsers.some((user) => user.id === socket.user.dataValues?.id)) {
+  if (!activeUsers.some((user) => user.id === socket.user?.dataValues?.id)) {
     activeUsers.push({
-      userId: socket.user.dataValues?.id || 1,
+      userId: socket.user?.dataValues?.id || 1,
       socketId: socket.id,
     });
   }
